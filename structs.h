@@ -7,7 +7,7 @@ typedef struct s_commen
     int i;
     int j;
     int k;
-    int l;;
+    int l;
     int t;
 }   t_commen;
 

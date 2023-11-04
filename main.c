@@ -189,15 +189,14 @@ void    special_split(t_lexer **lexer, char *str)
     while (str[i])
     {
         i = char_count(&str[i], &i);
-        content = ft_substr(str, temp, i);
+        content = ft_substr(str, i, char_count(&str[i], &i));
         lexer_lstadd_back(lexer, lexer_listnew(content));
     }
 }
 
-void    init_tables(t_core *g_core)
+void    add_malloc(t_core *g_core)
 {
     g_core->lexer = malloc(sizeof(t_lexer));
-    g_core->lexer = NULL;
 }
 
 int main(int argc, char **argv, char **env)
@@ -209,7 +208,7 @@ int main(int argc, char **argv, char **env)
     g_core = malloc(sizeof(t_core));
     if (!g_core)
         return (0);
-    init_tables(g_core);    
+    add_malloc(g_core);
     (void)argc;
     (void)argv;
     (void)env;
@@ -223,7 +222,7 @@ int main(int argc, char **argv, char **env)
             printf("%s\n", temp->content);
             temp = temp->next;
         }
-        if (!strcmp(input, "exit"));
+        if (!ft_strncmp(input, "exit", ft_strlen(input)));
             exit(0);
     }
 
