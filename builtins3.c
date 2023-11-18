@@ -6,7 +6,7 @@
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 20:03:57 by yokten            #+#    #+#             */
-/*   Updated: 2023/11/18 07:19:39 by yokten           ###   ########.fr       */
+/*   Updated: 2023/11/18 13:16:31 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	add_env(t_core	*core)
 			core->env = core->env->next;
 		core->i++;
 	}
+	core->env = core->env_head;
 }
 
 void	ft_env_management(t_core	*core)
@@ -37,4 +38,5 @@ void	ft_env_management(t_core	*core)
 		printf("%s\n", core->env->content);
 		core->env = core->env->next;
 	}
+	core->env = core->env_head;
 }

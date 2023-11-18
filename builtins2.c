@@ -97,7 +97,7 @@ void	add_export_env(t_core	*core)
 	core->l = 0;
 		export_lstadd_back(&core->export,
 				export_listnew(ft_strdup(core->lexer->content)));
-/* 	while (core->lexer->content[core->l])
+ 	while (core->lexer->content[core->l])
 	{
 		if (core->lexer->content[core->l] == '=')
 		{
@@ -106,7 +106,7 @@ void	add_export_env(t_core	*core)
 			break;
 		}
 		core->l++;
-	} */
+	}
 }
 
 /* 	core->i = 0;
