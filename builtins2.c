@@ -107,6 +107,8 @@ void	add_export_env(t_core	*core)
 		}
 		core->l++;
 	}
+	if (core->lexer->next != NULL && core->lexer->next->type == 2)
+		add_export_env(core);
 }
 
 /* 	core->i = 0;
