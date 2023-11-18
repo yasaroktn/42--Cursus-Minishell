@@ -51,6 +51,8 @@ void	ft_builtins(t_core *core)
 		else if (!ft_strncmp(core->lexer->content, "clear", 5)
 			&& ft_strlen(core->lexer->content) == 5)
 			flush_the_terminal();
+		else
+			printf("%s: command not found\n", core->lexer->content);
 	}
 }
 

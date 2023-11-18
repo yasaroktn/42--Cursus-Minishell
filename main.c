@@ -6,7 +6,7 @@
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 20:08:49 by yokten            #+#    #+#             */
-/*   Updated: 2023/11/18 07:16:53 by yokten           ###   ########.fr       */
+/*   Updated: 2023/11/18 15:14:04 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,6 @@ int	check_Q(t_core *core)
 		core->i = core->k;
 		while (core->input[core->i] != 34 && core->input[core->i])
 		{
-			if (core->input[core->i] == '$')
-				expander(core);
 			core->lexer->content[core->j] = core->input[core->i];
 			core->i++;
 			core->j++;
