@@ -68,7 +68,10 @@ int	echo_n_control(t_core *core)
 
 void	ft_echo_management(t_core *core)
 {
+	core->flag = 1;
 	core->lexer = core->lexer->next;
+	if (!ft_strncmp(core->lexer->content, "-n", 2) && echo_n_control(core))
+		core->flag = 0;
 	while (!ft_strncmp(core->lexer->content, "-n", 2) && echo_n_control(core))
 		core->lexer = core->lexer->next;
 	while (core->lexer)
@@ -81,12 +84,11 @@ void	ft_echo_management(t_core *core)
 		else if (core->lexer->type == 3)
 		{
 			core->lexer = core->lexer->next;
-
 			ft_builtins(core);
-
 		}
 	}
-	printf("\n");
+	if(core->flag == 1)
+		printf("\n");
 }
 
 int	exit_control(t_core *core)
