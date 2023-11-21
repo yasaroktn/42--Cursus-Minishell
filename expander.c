@@ -15,6 +15,18 @@
 void	expander(t_core	*core)
 {
 	core->k = 0;
-	core->expander = getenv(core->lexer->content);
-	printf("%s\n", core->expander);
+
+	while (core->lexer->content[core->k])
+	{
+		if (core->lexer->content[core->k] == '$')
+		{
+			core->k++;
+			if (getenv(&core->lexer->content[core->k]) == NULL)
+				core->lexer->content = "\0";
+			else
+				core->lexer->content = getenv(&core->lexer->content[core->k]);
+			break;
+		}
+		core->k++;
+	}
 }

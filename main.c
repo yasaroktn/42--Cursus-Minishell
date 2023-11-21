@@ -6,7 +6,7 @@
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 20:08:49 by yokten            #+#    #+#             */
-/*   Updated: 2023/11/18 15:14:04 by yokten           ###   ########.fr       */
+/*   Updated: 2023/11/21 23:03:33 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ int	check_Q(t_core *core)
 			core->j++;
 		}
 		core->lexer->content[core->j] = '\0';
+		expander(core);
 		if (core->input[core->i] != 34)
 			return (0);
 		core->i++;
@@ -142,6 +143,7 @@ void	leximus(t_core *core)
 			core->i++;
 		if (core->input[core->i] == '|')
 		{
+			core->child++;
 			core->lexer->type = 3;
 			core->flag = 1;
 			core->lexer->content = malloc(sizeof(char) * 2);
@@ -197,6 +199,7 @@ void	leximus(t_core *core)
 				}
 			}
 			core->lexer->content[core->j] = '\0';
+			expander(core);
 
 		}
 		while (core->input[core->i] == ' ')
@@ -227,7 +230,6 @@ void	flush_the_terminal(void)
 int	main(int argc, char **argv, char **env)
 {
 	t_core	*g_core;
-
 	flush_the_terminal();
 	g_core = malloc(sizeof(t_core));
 	init_list(g_core);
@@ -239,7 +241,8 @@ int	main(int argc, char **argv, char **env)
 	while (1)
 	{
 		g_core->input = readline(g_core->readline);
-		add_history(g_core->input);
+		if (g_core->input != NULL)
+			add_history(g_core->input);
 		if (g_core->input)
 		{
 			if (!control_quote(g_core))
@@ -248,5 +251,11 @@ int	main(int argc, char **argv, char **env)
 		}
 		if (*g_core->input != '\0')
 			ft_builtins(g_core);
+		g_core->pid = fork();
+		if (g_core->pid == -1)
+			perror("Wrong pid!");
+		else if (g_core->pid == 0)
+			ft_exec(g_core);
+		waitpid(g_core->pid, NULL, 0);
 	}
 }

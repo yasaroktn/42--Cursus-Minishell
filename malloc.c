@@ -2,6 +2,8 @@
 
 void	init_core(t_core *core)
 {
+	core->child = 1;
+	core->p = 0;
 	core->i = 0;
 	core->j = 0;
 	core->k = 0;

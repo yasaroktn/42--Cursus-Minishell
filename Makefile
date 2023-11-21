@@ -6,7 +6,7 @@
 #    By: yokten <yokten@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/06 20:04:22 by yokten            #+#    #+#              #
-#    Updated: 2023/11/18 05:13:43 by yokten           ###   ########.fr        #
+#    Updated: 2023/11/21 17:14:28 by yokten           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ SRCS	=	main.c				\
 			export.c			\
 			expander.c			\
 			builtins3.c 		\
+			exec.c 				\
 
 
 OBJS = $(SRCS:.c=.o)

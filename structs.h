@@ -6,7 +6,7 @@
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 20:04:30 by yokten            #+#    #+#             */
-/*   Updated: 2023/11/18 05:15:03 by yokten           ###   ########.fr       */
+/*   Updated: 2023/11/21 23:01:35 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,17 +41,20 @@ typedef struct s_core
 	t_env			*env_head;
 	t_export		*export;
 	t_export		*export_head;
+	pid_t			pid;
 	char			**expanded;
 	int				i;
 	int				j;
 	int				k;
 	int				l;
 	int				t;
+	int				p;
 	int				lex_flag;
 	int				control34;
 	int				control39;
 	int				exp_env_size;
 	int				flag;
+	int				child;
 	int				err_code;
 	char			*tmp_joined;
 	char			*pwd;
