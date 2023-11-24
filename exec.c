@@ -6,7 +6,7 @@
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:41:40 by yokten            #+#    #+#             */
-/*   Updated: 2023/11/24 23:06:07 by yokten           ###   ########.fr       */
+/*   Updated: 2023/11/25 01:38:04 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,13 +74,9 @@ void ft_exec(t_core *core)
 			core->flag1 = 1;
 		}
 		else if (core->lexer->next && core->lexer->next->type == 3 && core->flag1 == 1)
-		{
 			childforpipe(core, 2);
-		}
 		else
-		{
 			childforpipe(core, 3);
-		}
 		execve(res[core->j], arg, env2);
 	}
 }

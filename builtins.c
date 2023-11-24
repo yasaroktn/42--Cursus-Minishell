@@ -50,32 +50,36 @@ void	ft_builtins(t_core *core)
 			ft_export_management(core);
 		else
 		{
-			core->lexer = core->lexer_head;
-			int tmp = core->child;
+		/* 	pid_t a;
 
-				while (core->lexer && core->child > 0)
-				{
-					if (!ft_strncmp(core->lexer->content, "|", 1))
+			a = fork();
+			if (a == 0)
+			{ */
+				core->lexer = core->lexer_head;
+				int tmp = core->child;
+					while (core->lexer && core->child > 0)
 					{
-						if (core->child == 1)
+						if (!ft_strncmp(core->lexer->content, "|", 1))
 						{
-							core->lexer = core->lexer->next;
-							core->child = --tmp;
-							childforexec(core);
-							break;
+							if (core->child == 1)
+							{
+								core->lexer = core->lexer->next;
+								core->child = --tmp;
+								childforexec(core);
+								break;
+							}
+							else
+							{
+								printf("else girdim\n");
+								core->child--;
+							}
 						}
-						else
-						{
-							printf("else girdim\n");
-							core->child--;
-						}
-
+						core->lexer = core->lexer->next;
 					}
-					core->lexer = core->lexer->next;
-				}
-				if (core->pid[core->s] == 0)
-				ft_exec(core);
-			}
+					if (core->pid[core->s] == 0)
+					ft_exec(core);
+			//}
+		}
 			//if (core->pid[core->s] == 0)
 				//ft_exec(core);
 		}
