@@ -28,7 +28,7 @@ SRCS	=	main.c				\
 			expander.c			\
 			builtins3.c 		\
 			exec.c 				\
-
+			pipe.c				\
 
 OBJS = $(SRCS:.c=.o)
 

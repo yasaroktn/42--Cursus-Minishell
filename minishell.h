@@ -6,7 +6,7 @@
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 20:03:17 by yokten            #+#    #+#             */
-/*   Updated: 2023/11/21 23:02:55 by yokten           ###   ########.fr       */
+/*   Updated: 2023/11/24 22:20:10 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,10 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stddef.h>
+# include <string.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <sys/wait.h>
 # include "structs.h"
 # include "libft/libft.h"
 
@@ -51,5 +53,6 @@ void	add_env(t_core	*core);
 int		echo_n_control(t_core *core);
 void	ft_builtins(t_core *core);
 int		ft_strchr(const char *s, int c);
-
+void    childforexec(t_core *core);
+void    childforpipe(t_core *core, int flag);
 #endif

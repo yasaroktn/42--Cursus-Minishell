@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include <string.h>
 
 void	init_list(t_core *g_core)
 {
@@ -251,11 +250,5 @@ int	main(int argc, char **argv, char **env)
 		}
 		if (*g_core->input != '\0')
 			ft_builtins(g_core);
-		g_core->pid = fork();
-		if (g_core->pid == -1)
-			perror("Wrong pid!");
-		else if (g_core->pid == 0)
-			ft_exec(g_core);
-		waitpid(g_core->pid, NULL, 0);
 	}
 }

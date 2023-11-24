@@ -48,8 +48,38 @@ void	ft_builtins(t_core *core)
 		else if (!ft_strncmp(core->lexer->content, "export", 6)
 			&& ft_strlen(core->lexer->content) == 6)
 			ft_export_management(core);
+		else
+		{
+			core->lexer = core->lexer_head;
+			int tmp = core->child;
+
+				while (core->lexer && core->child > 0)
+				{
+					if (!ft_strncmp(core->lexer->content, "|", 1))
+					{
+						if (core->child == 1)
+						{
+							core->lexer = core->lexer->next;
+							core->child = --tmp;
+							childforexec(core);
+							break;
+						}
+						else
+						{
+							printf("else girdim\n");
+							core->child--;
+						}
+
+					}
+					core->lexer = core->lexer->next;
+				}
+				if (core->pid[core->s] == 0)
+				ft_exec(core);
+			}
+			//if (core->pid[core->s] == 0)
+				//ft_exec(core);
+		}
 		//printf("command not found: %s\n", core->lexer->content);
-	}
 }
 
 int	echo_n_control(t_core *core)

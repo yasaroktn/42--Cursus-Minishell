@@ -2,14 +2,20 @@
 
 void	init_core(t_core *core)
 {
-	core->child = 1;
+	core->child = 0;
 	core->p = 0;
 	core->i = 0;
 	core->j = 0;
 	core->k = 0;
 	core->l = 0;
 	core->t = 0;
+	core->s = 0;
+	core->z = -1;
+	core->pipes = malloc(sizeof(int *) * 100);
+	core->pid = malloc(sizeof(int) * 100);
 	core->flag = 0;
+	core->flag1 = 0;
+	core->flag2 = 0;
 	core->lex_flag = 0;
 	core->err_code = 0;
 	core->swap = NULL;
