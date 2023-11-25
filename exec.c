@@ -6,7 +6,7 @@
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:41:40 by yokten            #+#    #+#             */
-/*   Updated: 2023/11/25 06:23:27 by yokten           ###   ########.fr       */
+/*   Updated: 2023/11/25 13:21:14 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,10 @@ void childforexec(t_core *core)
 	if (core->flag1 == 0)
 	{
 		pipe(core->pipes);
-		pipe(core->std);
-		core->std[1] = dup(1);
 		core->flag1 = 1;
 	}
 	if (core->lexer_head || (!ft_strncmp(core->lexer->content, "|", 1) && core->lexer->next->content))
 	{
-		printf("girddfafdsfdsfim\n");
 		ft_exec(core);
 		core->flag1 = 2;
 	}
@@ -65,7 +62,6 @@ void childforexec(t_core *core)
 
 void	ft_exec(t_core	*core)
 {
-	printf("girdim\n");
 	char **res;
 	char *slash_content;
 	core->i = -1;
@@ -99,7 +95,6 @@ void	ft_exec(t_core	*core)
 		arg[core->i] = core->lexer->content;
 		core->i++;
 	}
-	printf("grepheyy\n");
 	arg[core->i] = NULL;
 	core->env = core->env_head;
 	core->i = 0;
@@ -108,9 +103,6 @@ void	ft_exec(t_core	*core)
 		env2[core->i++] = core->env->content;
 		core->env =core->env->next;
 	}
-	int i = -1;
-	while (arg[++i])
-		printf("%s\n", arg[i]);
 	pid_t pid = fork();
 	if (pid == 0)
 	{
@@ -119,7 +111,6 @@ void	ft_exec(t_core	*core)
 		{
 			close(core->pipes[1]);
 			dup2(core->pipes[0], 0);
-			printf("heyyinput\n");
 			close(core->pipes[0]);
 		}
 		if (core->lexer->next && core->lexer->next->type == 3)
@@ -128,7 +119,6 @@ void	ft_exec(t_core	*core)
 			dup2(core->pipes[1], 1);
 			close(core->pipes[1]);
 		}
-		printf("fdheyy\n");
 		execve(res[core->j], arg, env2);
 	}
 	waitpid(pid, NULL, 0);

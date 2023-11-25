@@ -6,7 +6,7 @@
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 20:04:30 by yokten            #+#    #+#             */
-/*   Updated: 2023/11/25 06:08:49 by yokten           ###   ########.fr       */
+/*   Updated: 2023/11/25 13:20:03 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ typedef struct s_core
 	int				s;
 	int 			z;
 	int				pipes[2];
-	int				std[2];
+	//int				pipes2[2];
 	int				lex_flag;
 	int				control34;
 	int				control39;

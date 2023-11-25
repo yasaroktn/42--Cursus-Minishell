@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-void childforpipe(t_core *core, int flag)
+/* void childforpipe(t_core *core, int flag)
 {
     core->lexer = core->lexer->next;
     if (flag == 1)
@@ -17,4 +17,4 @@ void childforpipe(t_core *core, int flag)
         close(core->pipes[0]);
     }
     close(core->pipes[0]);
-}
+} */

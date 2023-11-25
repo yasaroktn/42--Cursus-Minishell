@@ -6,7 +6,7 @@
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 20:08:49 by yokten            #+#    #+#             */
-/*   Updated: 2023/11/25 05:55:32 by yokten           ###   ########.fr       */
+/*   Updated: 2023/11/25 12:18:35 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -233,7 +233,6 @@ int	main(int argc, char **argv, char **env)
 	g_core = malloc(sizeof(t_core));
 	init_list(g_core);
 	init_core(g_core);
-		printf("girdimasdasda\n");
 	init_temp(env, g_core);
 	(void)argc;
 	(void)argv;
