@@ -6,7 +6,7 @@
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 20:04:30 by yokten            #+#    #+#             */
-/*   Updated: 2023/11/24 22:34:08 by yokten           ###   ########.fr       */
+/*   Updated: 2023/11/25 06:08:49 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,15 @@ typedef struct s_core
 	int				p;
 	int				s;
 	int 			z;
-	int				flag;
-	int				flag1;
-	int				**pipes;
+	int				pipes[2];
+	int				std[2];
 	int				lex_flag;
 	int				control34;
 	int				control39;
 	int				exp_env_size;
+	int				flag;
+	int				flag1;
+	int				flag2;
 	int				child;
 	int				err_code;
 	char			*tmp_joined;
@@ -68,8 +70,7 @@ typedef struct s_core
 	char			**exp_env;
 	char			*swap;
 	char			*expander;
-	int				errno;
-	int				flag2;
+	int fd[2];
 }	t_core;
 
 #endif

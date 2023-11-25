@@ -11,7 +11,6 @@ void	init_core(t_core *core)
 	core->t = 0;
 	core->s = 0;
 	core->z = -1;
-	core->pipes = malloc(sizeof(int *) * 100);
 	core->pid = malloc(sizeof(int) * 100);
 	core->flag = 0;
 	core->flag1 = 0;

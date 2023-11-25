@@ -6,25 +6,66 @@
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:41:40 by yokten            #+#    #+#             */
-/*   Updated: 2023/11/25 01:38:04 by yokten           ###   ########.fr       */
+/*   Updated: 2023/11/25 06:23:27 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+//void execc(t_core *core, char **arg, char **env, int f)
+//{
+//	int fd[2];
+//	int	i;
+//	pid_t pid;
+//	
+//	pipe(fd);
+//	pid = fork();
+//	if (pid == 0)
+//	{
+//		if (f == 1)
+//			dup2(fd[0], 0);
+//		i = 0;
+//		while (arg[i])
+//		{
+//			if(strncmp(arg[i], "|", 1) == 0)
+//			{
+//				dup2(fd[1], 1);
+//				arg[i] = NULL;
+//				break ;
+//			}	
+//		}
+//		execve(arg[0], arg, env);
+//	}
+//	waitpid(pid, NULL, 0);
+//	close(fd[0]);
+//	close(fd[1]);
+//}
+
 void childforexec(t_core *core)
 {
-	pipe(core->pipes[core->z]);
-	core->pid[core->s] = fork();
-	if (core->pid[core->s] == -1)
-		perror("Wrong pid!");
-	else if (core->pid[core->s++] == 0)
-		ft_builtins(core);
-	waitpid(core->pid[core->s - 1], NULL, 0);
+	if (core->flag1 == 0)
+	{
+		pipe(core->pipes);
+		pipe(core->std);
+		core->std[1] = dup(1);
+		core->flag1 = 1;
+	}
+	if (core->lexer_head || (!ft_strncmp(core->lexer->content, "|", 1) && core->lexer->next->content))
+	{
+		printf("girddfafdsfdsfim\n");
+		ft_exec(core);
+		core->flag1 = 2;
+	}
+	if (ft_strncmp(core->lexer->content, "|", 1) == 0)
+	{
+		core->lexer = core->lexer->next;
+		ft_exec(core);
+	}
 }
 
-void ft_exec(t_core *core)
+void	ft_exec(t_core	*core)
 {
+	printf("girdim\n");
 	char **res;
 	char *slash_content;
 	core->i = -1;
@@ -34,17 +75,17 @@ void ft_exec(t_core *core)
 
 	while (core->env)
 	{
-
-		if (!ft_strncmp(core->env->content, "PATH=", 5))
+		if (!ft_strncmp(core->env->content,"PATH=", 5))
 			break;
 		core->env = core->env->next;
 	}
 	res = ft_split(&core->env->content[5], ':');
-	slash_content = ft_strjoin("/", core->lexer->content);
+	slash_content = ft_strjoin("/",core->lexer->content);
 
-	while (res[++core->i])
+	while(res[++core->i])
 		res[core->i] = ft_strjoin(res[core->i], slash_content);
 	core->j = -1;
+	
 	while (res[++core->j])
 	{
 		if (!access(res[core->j], F_OK))
@@ -58,25 +99,46 @@ void ft_exec(t_core *core)
 		arg[core->i] = core->lexer->content;
 		core->i++;
 	}
+	printf("grepheyy\n");
 	arg[core->i] = NULL;
 	core->env = core->env_head;
 	core->i = 0;
 	while (core->env)
 	{
 		env2[core->i++] = core->env->content;
-		core->env = core->env->next;
+		core->env =core->env->next;
 	}
-	if (core->pid[core->s++] == 0)
-	{	
-		if (core->lexer->next && core->lexer->next->type == 3 && core->flag1 == 0)
+	int i = -1;
+	while (arg[++i])
+		printf("%s\n", arg[i]);
+	pid_t pid = fork();
+	if (pid == 0)
+	{
+		//ORTADA Kİ COMMANDLER İÇİN YAZILACAK
+		if (core->flag1 == 2)
 		{
-			childforpipe(core, 1);
-			core->flag1 = 1;
+			close(core->pipes[1]);
+			dup2(core->pipes[0], 0);
+			printf("heyyinput\n");
+			close(core->pipes[0]);
 		}
-		else if (core->lexer->next && core->lexer->next->type == 3 && core->flag1 == 1)
-			childforpipe(core, 2);
-		else
-			childforpipe(core, 3);
+		if (core->lexer->next && core->lexer->next->type == 3)
+		{
+			close(core->pipes[0]);
+			dup2(core->pipes[1], 1);
+			close(core->pipes[1]);
+		}
+		printf("fdheyy\n");
 		execve(res[core->j], arg, env2);
 	}
+	waitpid(pid, NULL, 0);
+	if (core->lexer->next && core->lexer->next->type == 3 && core->flag2 == 0)
+	{
+		core->flag2++;
+		close(core->pipes[1]);
+	}
+	//DÜZELTİLECEK
+	else if (core->lexer->next && core->lexer->next->type == 3 && core->flag == 1);
+	else
+		close(core->pipes[0]);
 }
