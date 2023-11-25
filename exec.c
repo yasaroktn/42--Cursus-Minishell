@@ -6,7 +6,7 @@
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:41:40 by yokten            #+#    #+#             */
-/*   Updated: 2023/11/25 13:21:14 by yokten           ###   ########.fr       */
+/*   Updated: 2023/11/25 16:20:21 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,23 +102,38 @@ void	ft_exec(t_core	*core)
 	{
 		env2[core->i++] = core->env->content;
 		core->env =core->env->next;
-	}
+	} 
 	pid_t pid = fork();
 	if (pid == 0)
 	{
 		//ORTADA Kİ COMMANDLER İÇİN YAZILACAK
-		if (core->flag1 == 2)
-		{
-			close(core->pipes[1]);
-			dup2(core->pipes[0], 0);
-			close(core->pipes[0]);
-		}
 		if (core->lexer->next && core->lexer->next->type == 3)
 		{
 			close(core->pipes[0]);
 			dup2(core->pipes[1], 1);
 			close(core->pipes[1]);
 		}
+		if (core->flag1 == 2 && core->lexer->next != NULL)
+		{			close(core->pipes[1]);
+			dup2(core->pipes[0], 0);
+			close(core->pipes[0]);
+			close(core->pipes1[0]);
+			dup2(core->pipes1[1], 1);
+			close(core->pipes1[1]);
+		}
+		else
+		{
+			close(core->pipes1[1]);
+			dup2(core->pipes1[0], 0);
+			close(core->pipes1[0]);
+		}
+/* 		else
+		{
+			close(core->pipes[1]);
+			dup2(core->pipes[0], 0);
+			close(core->pipes[0]);
+		}
+*/
 		execve(res[core->j], arg, env2);
 	}
 	waitpid(pid, NULL, 0);
@@ -126,9 +141,18 @@ void	ft_exec(t_core	*core)
 	{
 		core->flag2++;
 		close(core->pipes[1]);
+		close(core->pipes1[0]);
+		close(core->pipes1[1]);
 	}
-	//DÜZELTİLECEK
-	else if (core->lexer->next && core->lexer->next->type == 3 && core->flag == 1);
+	else if (core->lexer->next && core->lexer->next->type == 3 && core->flag2 == 1)
+	{
+		close(core->pipes[1]);
+		close(core->pipes1[0]);
+	}
 	else
+	{
 		close(core->pipes[0]);
+		close(core->pipes[1]);
+		close(core->pipes1[1]);
+	}
 }

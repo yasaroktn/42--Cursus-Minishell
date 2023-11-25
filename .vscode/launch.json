@@ -6,8 +6,8 @@
       "type": "lldb",
       "request": "launch",
       "args": [],
-      "cwd": "/Users/yokten/Desktop/sonhal",
-      "program": "/Users/yokten/Desktop/sonhal/build/Debug/outDebug"
+      "cwd": "/Users/yokten/Desktop/42--Cursus-Minishell",
+      "program": "/Users/yokten/Desktop/42--Cursus-Minishell/build/Debug/outDebug"
     }
   ]
 }
