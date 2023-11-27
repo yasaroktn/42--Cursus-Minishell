@@ -6,12 +6,26 @@
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 20:04:30 by yokten            #+#    #+#             */
-/*   Updated: 2023/11/27 12:33:15 by yokten           ###   ########.fr       */
+/*   Updated: 2023/11/27 21:07:37 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
+
+# include <stdio.h>
+# include <readline/readline.h>
+# include <readline/history.h>
+# include <unistd.h>
+# include <stdlib.h>
+# include <errno.h>
+# include <string.h>
+# include <sys/types.h>
+# include <sys/wait.h>
+# include <fcntl.h>
+# include <dirent.h>
+# include <signal.h>
+# include <sys/ioctl.h>
 
 typedef struct s_lexer
 {
@@ -74,6 +88,7 @@ typedef struct s_core
 	char			**exp_env;
 	char			*swap;
 	char			*expander;
+	int				default_out;
 	int 			process_iterator;
 	int 			exec_fd;
 	int fd[2];

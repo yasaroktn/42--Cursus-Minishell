@@ -6,7 +6,7 @@
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 20:08:49 by yokten            #+#    #+#             */
-/*   Updated: 2023/11/27 17:02:42 by yokten           ###   ########.fr       */
+/*   Updated: 2023/11/27 21:10:40 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,7 +152,6 @@ void	leximus(t_core *core)
 		else if (core->input[core->i] == '<' || core->input[core->i] == '>')
 		{
 			core->lexer->type = 4;
-			core->flag = 1;
 			check_redirection(core);
 		}
 		else if (core->input[core->i] == 34 || core->input[core->i] == 39)
@@ -237,6 +236,7 @@ int	main(int argc, char **argv, char **env)
 	init_core(g_core);
 	(void)argc;
 	(void)argv;
+	g_core->default_out = dup(1);
 	g_core->readline = ft_strjoin(g_core->pwd, " > monkeys 🙉🙊🙈 :\033[0;37m ");
 	while (1)
 	{

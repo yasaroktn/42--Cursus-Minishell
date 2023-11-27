@@ -6,7 +6,7 @@
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:41:40 by yokten            #+#    #+#             */
-/*   Updated: 2023/11/27 17:04:12 by yokten           ###   ########.fr       */
+/*   Updated: 2023/11/27 21:40:59 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	ft_exec(t_core	*core)
 	int io[2];
 	pipe(io);
 	ft_access(core);
+/* 	char *string[] = {"cat", "a.txt", NULL}; */
 	pid = fork();
 	if (pid == 0)
 	{
@@ -33,14 +34,24 @@ void	ft_exec(t_core	*core)
 			close(core->exec_fd);
 		}
 		if (core->process_iterator != core->child)
+		{
 			dup2(io[1], 1);
+			close(core->exec_fd);
+		}
 		close(io[0]);
 		close(io[1]);
+/* 		if (!ft_strncmp(core->lexer_head->content, "cat", 3))
+		{
+			execve("/bin/cat", string, core->env2);
+			printf("error\n %s \n %s\n", string[1], string[0]);
+		}
+		else */
 		execve(core->res[core->j], core->arg, core->env2);
 	}
 	if (core->process_iterator != 0)
 		close(core->exec_fd);
 	close(io[1]);
+	dup2(core->default_out, 1);
 	core->exec_fd = io[0];
 	core->process_iterator++;
 }
@@ -78,25 +89,21 @@ void	ft_access (t_core	*core)
 		exit(1);
 	}
 	core->arg[0] = core->lexer->content;
-	printf("sinem\n");
-/* 	while (core->lexer)
-	{
-		printf("%s\n", core->lexer->content);
-		core->lexer = core->lexer->next;
-	} */
+	core->i = 1;
 	while (core->lexer->next && (core->lexer->next->type == 2 || core->lexer->next->type == 4))
-	{/* 
-		printf("%s\n", core->lexer->content);
-		printf("%s\n", core->lexer->content); */
+	{
 		core->lexer = core->lexer->next;
-			core->arg[core->i] = core->lexer->content;
-			core->i++;
+			if(core->lexer->type == 2)
+			{
+				core->arg[core->i] = core->lexer->content;
+				core->i++;
+			}
 			if (core->lexer->type == 4)
 			{
-				printf("%s\n", core->lexer->content);
+				//core->lexer = core->lexer_head;
 				ft_redirections(core);
+				break;
 			}
-			printf("%s\n", core->lexer->content);
 	}
 	core->arg[core->i] = NULL;
 	core->env = core->env_head;

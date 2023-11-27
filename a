@@ -1,0 +1,10 @@
+asd
+ls
+-la
+> 
+a
+error
+ ls 
+ -la
+ > 
+-rwxr-xr-x  1 yokten  2022_istanbul  36 27 Kas 21:18 a
