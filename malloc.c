@@ -15,8 +15,11 @@ void	init_core(t_core *core)
 	core->flag = 0;
 	core->flag1 = 0;
 	core->flag2 = 0;
+	core->flag = 0;
 	core->lex_flag = 0;
 	core->err_code = 0;
+	core->exec_fd = 0;
+	core->process_iterator = 0;
 	core->swap = NULL;
 	core->expanded = NULL;
 	core->pwd = ft_strjoin("\033[0;35m", getcwd(core->pwd, 0));

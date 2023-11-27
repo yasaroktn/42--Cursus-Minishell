@@ -6,7 +6,7 @@
 #    By: yokten <yokten@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/06 20:04:22 by yokten            #+#    #+#              #
-#    Updated: 2023/11/21 17:14:28 by yokten           ###   ########.fr        #
+#    Updated: 2023/11/26 18:03:06 by yokten           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,7 @@ B = "\033[34m"
 all: $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT)
-	@$(CC) $(CFLAGS) $(LIBFT) $(OBJS) $(LIBS) -o $(NAME) -lreadline
+	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(LIBS) -o $(NAME) -lreadline
 	@echo $(G)"[✓] "$(B)"minishell"
 
 $(LIBFT) : 

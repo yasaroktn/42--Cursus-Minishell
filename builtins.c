@@ -1,5 +1,4 @@
 #include "minishell.h"
-
 // fix the seg of third
 void ft_unset_management(t_core *core)
 {
@@ -45,6 +44,7 @@ void ft_builtins(t_core *core)
 		{
 			childforexec(core);
 		}
+		
 		// printf("command not found: %s\n", core->lexer->content);
 	}
 }

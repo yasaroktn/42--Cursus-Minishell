@@ -6,7 +6,7 @@
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 20:03:17 by yokten            #+#    #+#             */
-/*   Updated: 2023/11/25 11:56:30 by yokten           ###   ########.fr       */
+/*   Updated: 2023/11/27 03:33:03 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,12 @@ void	print_export(t_core	*core);
 void	ft_exec(t_core	*core);
 void	add_env(t_core	*core);
 int		echo_n_control(t_core *core);
+void	ft_access (t_core	*core);
 void	ft_builtins(t_core *core);
 int		ft_strchr(const char *s, int c);
 void    childforexec(t_core *core);
 //void    childforpipe(t_core *core, int flag);
 #endif
+
+
+// 954e4a17b4f63bdb8f9db5dab05a0c3bfad61bb6 

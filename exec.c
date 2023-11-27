@@ -6,67 +6,53 @@
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:41:40 by yokten            #+#    #+#             */
-/*   Updated: 2023/11/25 16:20:21 by yokten           ###   ########.fr       */
+/*   Updated: 2023/11/27 12:36:44 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-//void execc(t_core *core, char **arg, char **env, int f)
-//{
-//	int fd[2];
-//	int	i;
-//	pid_t pid;
-//	
-//	pipe(fd);
-//	pid = fork();
-//	if (pid == 0)
-//	{
-//		if (f == 1)
-//			dup2(fd[0], 0);
-//		i = 0;
-//		while (arg[i])
-//		{
-//			if(strncmp(arg[i], "|", 1) == 0)
-//			{
-//				dup2(fd[1], 1);
-//				arg[i] = NULL;
-//				break ;
-//			}	
-//		}
-//		execve(arg[0], arg, env);
-//	}
-//	waitpid(pid, NULL, 0);
-//	close(fd[0]);
-//	close(fd[1]);
-//}
+#include <fcntl.h>
 
 void childforexec(t_core *core)
 {
-	if (core->flag1 == 0)
-	{
-		pipe(core->pipes);
-		core->flag1 = 1;
-	}
-	if (core->lexer_head || (!ft_strncmp(core->lexer->content, "|", 1) && core->lexer->next->content))
-	{
-		ft_exec(core);
-		core->flag1 = 2;
-	}
-	if (ft_strncmp(core->lexer->content, "|", 1) == 0)
-	{
-		core->lexer = core->lexer->next;
-		ft_exec(core);
-	}
+	ft_exec(core);
 }
 
 void	ft_exec(t_core	*core)
 {
-	char **res;
+	fprintf(stderr, "i = %d\n", 312312);
+
+	pid_t pid;
+	int io[2];
+	pipe(io);
+	ft_access(core);
+	pid = fork();
+	if (pid == 0)
+	{
+		if (core->process_iterator != 0)
+		{
+			dup2(core->exec_fd, 0);
+			close(core->exec_fd);
+		}
+		if (core->process_iterator != core->child)
+			dup2(io[1], 1);
+		close(io[0]);
+		close(io[1]);
+		execve(core->res[core->j], core->arg, core->env2);
+	}
+	if (core->process_iterator != 0)
+		close(core->exec_fd);
+	close(io[1]);
+	core->exec_fd = io[0];
+	core->process_iterator++;
+}
+
+void	ft_access (t_core	*core)
+{
 	char *slash_content;
 	core->i = -1;
-	char **arg = malloc(sizeof(char *) * 100);
-	char **env2 = malloc(sizeof(char *) * 100);
+	core->arg = malloc(sizeof(char *) * 100);
+	core->env2 = malloc(sizeof(char *) * 100);
 	core->env = core->env_head;
 
 	while (core->env)
@@ -75,84 +61,38 @@ void	ft_exec(t_core	*core)
 			break;
 		core->env = core->env->next;
 	}
-	res = ft_split(&core->env->content[5], ':');
+
+	core->res = ft_split(&core->env->content[5], ':');
 	slash_content = ft_strjoin("/",core->lexer->content);
 
-	while(res[++core->i])
-		res[core->i] = ft_strjoin(res[core->i], slash_content);
+	while(core->res[++core->i])
+		core->res[core->i] = ft_strjoin(core->res[core->i], slash_content);
 	core->j = -1;
 	
-	while (res[++core->j])
+	while (core->res[++core->j])
 	{
-		if (!access(res[core->j], F_OK))
+		if (!access(core->res[core->j], F_OK))
 			break;
 	}
-	arg[0] = core->lexer->content;
+	if (core->res[core->j] == NULL)
+	{
+		printf("command not found: %s\n", core->lexer->content);
+		exit(1);
+	}
+	core->arg[0] = core->lexer->content;
 	core->i = 1;
 	while (core->lexer->next && core->lexer->next->type == 2)
 	{
 		core->lexer = core->lexer->next;
-		arg[core->i] = core->lexer->content;
+		core->arg[core->i] = core->lexer->content;
 		core->i++;
 	}
-	arg[core->i] = NULL;
+	core->arg[core->i] = NULL;
 	core->env = core->env_head;
 	core->i = 0;
 	while (core->env)
 	{
-		env2[core->i++] = core->env->content;
+		core->env2[core->i++] = core->env->content;
 		core->env =core->env->next;
-	} 
-	pid_t pid = fork();
-	if (pid == 0)
-	{
-		//ORTADA Kİ COMMANDLER İÇİN YAZILACAK
-		if (core->lexer->next && core->lexer->next->type == 3)
-		{
-			close(core->pipes[0]);
-			dup2(core->pipes[1], 1);
-			close(core->pipes[1]);
-		}
-		if (core->flag1 == 2 && core->lexer->next != NULL)
-		{			close(core->pipes[1]);
-			dup2(core->pipes[0], 0);
-			close(core->pipes[0]);
-			close(core->pipes1[0]);
-			dup2(core->pipes1[1], 1);
-			close(core->pipes1[1]);
-		}
-		else
-		{
-			close(core->pipes1[1]);
-			dup2(core->pipes1[0], 0);
-			close(core->pipes1[0]);
-		}
-/* 		else
-		{
-			close(core->pipes[1]);
-			dup2(core->pipes[0], 0);
-			close(core->pipes[0]);
-		}
-*/
-		execve(res[core->j], arg, env2);
-	}
-	waitpid(pid, NULL, 0);
-	if (core->lexer->next && core->lexer->next->type == 3 && core->flag2 == 0)
-	{
-		core->flag2++;
-		close(core->pipes[1]);
-		close(core->pipes1[0]);
-		close(core->pipes1[1]);
-	}
-	else if (core->lexer->next && core->lexer->next->type == 3 && core->flag2 == 1)
-	{
-		close(core->pipes[1]);
-		close(core->pipes1[0]);
-	}
-	else
-	{
-		close(core->pipes[0]);
-		close(core->pipes[1]);
-		close(core->pipes1[1]);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 20:08:49 by yokten            #+#    #+#             */
-/*   Updated: 2023/11/25 12:18:35 by yokten           ###   ########.fr       */
+/*   Updated: 2023/11/27 12:35:45 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,7 @@ int	check_redirection(t_core *core)
 	int	a;
 
 	a = core->i;
-	if ((core->input[core->i] == '<' && core->input[core->i + 1] != '>')
-		|| (core->input[core->i] == '>' && core->input[core->i + 1] != '<'))
+	if (core->input[core->i] == '>' && core->input[core->i + 1] != '<')
 		core->i += 1;
 	if (core->input[core->i] == core->input[core->i - 1])
 		core->i += 1;
@@ -152,7 +151,7 @@ void	leximus(t_core *core)
 		}
 		else if (core->input[core->i] == '<' || core->input[core->i] == '>')
 		{
-			core->lexer->type = 3;
+			core->lexer->type = 4;
 			core->flag = 1;
 		}
 		else if (core->input[core->i] == 34 || core->input[core->i] == 39)
@@ -222,6 +221,7 @@ void	flush_the_terminal(void)
 	printf("\033[001;1H\033[2J");
 }
 
+
 // fix the seg of third
 // mallocların hepsi calloc olacak
 // seri readline kullanımı seggy fucky
@@ -232,13 +232,14 @@ int	main(int argc, char **argv, char **env)
 	flush_the_terminal();
 	g_core = malloc(sizeof(t_core));
 	init_list(g_core);
-	init_core(g_core);
 	init_temp(env, g_core);
+	init_core(g_core);
 	(void)argc;
 	(void)argv;
 	g_core->readline = ft_strjoin(g_core->pwd, " > monkeys 🙉🙊🙈 :\033[0;37m ");
 	while (1)
 	{
+		init_core(g_core);
 		g_core->input = readline(g_core->readline);
 		if (g_core->input != NULL)
 			add_history(g_core->input);
@@ -249,13 +250,20 @@ int	main(int argc, char **argv, char **env)
 			leximus(g_core);
 		}
 		g_core->flag1 = 0;
+		g_core->exec_fd = 0;
+		g_core->process_iterator =0;
 		while (g_core->lexer != NULL)
 		{
 			if (g_core->lexer->type == 1)
 				ft_builtins(g_core);
-			if (g_core->lexer->next == NULL)
+			if (!g_core->lexer || g_core->lexer->next == NULL)
 				break ;
 			g_core->lexer = g_core->lexer->next;
 		}
+		for (int i = 0; i < g_core->child + 1; i++)
+		{
+			wait(g_core->pid);
+		}
+		
 	}
 }

@@ -25,13 +25,13 @@ void	*ft_memchr(const void *s, int c, size_t n)
 	{
 		if (a[i] == (unsigned char)c)
 		{
-			return ((void *)&s[i]);
+			return ((void *)&a[i]);
 		}
 		i++;
 	}
 	if (c == '\0')
 	{
-		return ((void *)&s[i]);
+		return ((void *)&a[i]);
 	}
 	return (NULL);
 }
