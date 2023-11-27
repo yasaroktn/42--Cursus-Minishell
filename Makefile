@@ -6,7 +6,7 @@
 #    By: yokten <yokten@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/06 20:04:22 by yokten            #+#    #+#              #
-#    Updated: 2023/11/26 18:03:06 by yokten           ###   ########.fr        #
+#    Updated: 2023/11/27 13:12:47 by yokten           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ SRCS	=	main.c				\
 			builtins3.c 		\
 			exec.c 				\
 			pipe.c				\
+			redirections.c		\
 
 OBJS = $(SRCS:.c=.o)
 

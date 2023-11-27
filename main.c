@@ -6,7 +6,7 @@
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 20:08:49 by yokten            #+#    #+#             */
-/*   Updated: 2023/11/27 12:35:45 by yokten           ###   ########.fr       */
+/*   Updated: 2023/11/27 17:02:42 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,6 +153,7 @@ void	leximus(t_core *core)
 		{
 			core->lexer->type = 4;
 			core->flag = 1;
+			check_redirection(core);
 		}
 		else if (core->input[core->i] == 34 || core->input[core->i] == 39)
 		{
@@ -241,6 +242,7 @@ int	main(int argc, char **argv, char **env)
 	{
 		init_core(g_core);
 		g_core->input = readline(g_core->readline);
+		
 		if (g_core->input != NULL)
 			add_history(g_core->input);
 		if (g_core->input)

@@ -6,7 +6,7 @@
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:41:40 by yokten            #+#    #+#             */
-/*   Updated: 2023/11/27 12:36:44 by yokten           ###   ########.fr       */
+/*   Updated: 2023/11/27 17:04:12 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@ void childforexec(t_core *core)
 
 void	ft_exec(t_core	*core)
 {
-	fprintf(stderr, "i = %d\n", 312312);
-
 	pid_t pid;
 	int io[2];
 	pipe(io);
@@ -80,12 +78,25 @@ void	ft_access (t_core	*core)
 		exit(1);
 	}
 	core->arg[0] = core->lexer->content;
-	core->i = 1;
-	while (core->lexer->next && core->lexer->next->type == 2)
+	printf("sinem\n");
+/* 	while (core->lexer)
 	{
+		printf("%s\n", core->lexer->content);
 		core->lexer = core->lexer->next;
-		core->arg[core->i] = core->lexer->content;
-		core->i++;
+	} */
+	while (core->lexer->next && (core->lexer->next->type == 2 || core->lexer->next->type == 4))
+	{/* 
+		printf("%s\n", core->lexer->content);
+		printf("%s\n", core->lexer->content); */
+		core->lexer = core->lexer->next;
+			core->arg[core->i] = core->lexer->content;
+			core->i++;
+			if (core->lexer->type == 4)
+			{
+				printf("%s\n", core->lexer->content);
+				ft_redirections(core);
+			}
+			printf("%s\n", core->lexer->content);
 	}
 	core->arg[core->i] = NULL;
 	core->env = core->env_head;
