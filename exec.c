@@ -6,7 +6,7 @@
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:41:40 by yokten            #+#    #+#             */
-/*   Updated: 2023/11/28 22:17:14 by yokten           ###   ########.fr       */
+/*   Updated: 2023/11/28 22:24:41 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	ft_exec(t_core	*core)
 	pid = fork();
 	if (pid == 0)
 	{
-		ft_access(core);
 		if (core->process_iterator != 0)
 		{
 			dup2(core->exec_fd, 0);
@@ -49,6 +48,7 @@ void	ft_exec(t_core	*core)
 		/* char *yarra = "";
 		read(STDIN_FILENO, yarra, 100000);
 		printf("%s\n", yarra); */
+		ft_access(core);
 		execve(core->res[core->j], core->arg, core->env2);
 	}
 	if (core->process_iterator != 0)
