@@ -6,7 +6,7 @@
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 20:08:49 by yokten            #+#    #+#             */
-/*   Updated: 2023/11/27 21:10:40 by yokten           ###   ########.fr       */
+/*   Updated: 2023/11/28 22:12:24 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,21 @@ int	check_redirection(t_core *core)
 	int	a;
 
 	a = core->i;
-	if (core->input[core->i] == '>' && core->input[core->i + 1] != '<')
+	if (!ft_strncmp(&core->input[core->i], ">>", 2))
+		core->i +=2;
+	else if(!ft_strncmp(&core->input[core->i], ">", 1))
+		core->i +=1;
+	else if (!ft_strncmp(&core->input[core->i], "<<", 2))
+		core->i +=2;
+	else if(!ft_strncmp(&core->input[core->i], "<", 1))
+		core->i +=1;
+	/* if (core->input[core->i] == '>' && core->input[core->i + 1] != '<')
 		core->i += 1;
 	if (core->input[core->i] == core->input[core->i - 1])
 		core->i += 1;
 	if (a == core->i - 2 && core->input[core->i] == core->input[core->i - 1])
-		core->i--;
-	else if (a < core->i)
+		core->i--; */
+	if (a < core->i)
 	{
 		core->lexer->content = malloc(sizeof(char) * (core->i - a + 1));
 		while (a <= core->i)
@@ -152,6 +160,7 @@ void	leximus(t_core *core)
 		else if (core->input[core->i] == '<' || core->input[core->i] == '>')
 		{
 			core->lexer->type = 4;
+			write(1, "TESTER\n", 7);
 			check_redirection(core);
 		}
 		else if (core->input[core->i] == 34 || core->input[core->i] == 39)
@@ -266,6 +275,5 @@ int	main(int argc, char **argv, char **env)
 		{
 			wait(g_core->pid);
 		}
-		
 	}
 }

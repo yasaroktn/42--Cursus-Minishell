@@ -41,7 +41,9 @@ void ft_builtins(t_core *core)
 		else if (!ft_strncmp(core->lexer->content, "export", 6) && ft_strlen(core->lexer->content) == 6)
 			ft_export_management(core);
 		else
+		{
 			childforexec(core);
+		}
 	}
 }
 

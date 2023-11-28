@@ -3,6 +3,7 @@
 void ft_redirections(t_core *core)
 {
 	core->l = 0;
+	
 	if ((!ft_strncmp(core->lexer->content, ">>", 2)))
 	{
 		create_file(core,1);
@@ -17,6 +18,7 @@ void ft_redirections(t_core *core)
 	}
 	else if (!ft_strncmp(core->lexer->content, "<", 1))
 	{
+		write(1, "TESTERaa\n", 7);
 		input(core);
 	}
 }
@@ -47,14 +49,12 @@ void input(t_core *core)
 {
 	int	fd;
 
-	fd = open(core->lexer->next->content, O_RDONLY);
+	fd = open(core->lexer->next->content, O_RDONLY, 777);
 	if (fd == -1)
-		return ;
-	else
 	{
-		dup2(fd, 0);
 		close(fd);
+		return ;
 	}
-	if (fd != -1)
-		close(fd);
+	dup2(fd, STDIN_FILENO);
+	close(fd);
 }

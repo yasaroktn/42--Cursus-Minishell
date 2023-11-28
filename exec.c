@@ -6,7 +6,7 @@
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:41:40 by yokten            #+#    #+#             */
-/*   Updated: 2023/11/27 21:40:59 by yokten           ###   ########.fr       */
+/*   Updated: 2023/11/28 22:17:14 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ void	ft_exec(t_core	*core)
 	pid_t pid;
 	int io[2];
 	pipe(io);
-	ft_access(core);
 /* 	char *string[] = {"cat", "a.txt", NULL}; */
 	pid = fork();
 	if (pid == 0)
 	{
+		ft_access(core);
 		if (core->process_iterator != 0)
 		{
 			dup2(core->exec_fd, 0);
@@ -46,6 +46,9 @@ void	ft_exec(t_core	*core)
 			printf("error\n %s \n %s\n", string[1], string[0]);
 		}
 		else */
+		/* char *yarra = "";
+		read(STDIN_FILENO, yarra, 100000);
+		printf("%s\n", yarra); */
 		execve(core->res[core->j], core->arg, core->env2);
 	}
 	if (core->process_iterator != 0)
@@ -58,6 +61,7 @@ void	ft_exec(t_core	*core)
 
 void	ft_access (t_core	*core)
 {
+	
 	char *slash_content;
 	core->i = -1;
 	core->arg = malloc(sizeof(char *) * 100);
