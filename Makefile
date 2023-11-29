@@ -6,7 +6,7 @@
 #    By: yokten <yokten@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/06 20:04:22 by yokten            #+#    #+#              #
-#    Updated: 2023/11/29 13:34:03 by yokten           ###   ########.fr        #
+#    Updated: 2023/11/29 13:35:00 by yokten           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,6 +63,8 @@ $(NAME): $(OBJS)  $(LIBFT)
 	@make -C libft
 fclean: clean
 	$(RM) $(NAME)
+	@make fclean -C libft
+	@make fclean -C lib/
 	@rm -rf readline-8.2 readline-8.2.tar.gz
 
 git:
