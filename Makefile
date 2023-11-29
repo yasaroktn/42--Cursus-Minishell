@@ -6,7 +6,7 @@
 #    By: yokten <yokten@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/06 20:04:22 by yokten            #+#    #+#              #
-#    Updated: 2023/11/27 13:12:47 by yokten           ###   ########.fr        #
+#    Updated: 2023/11/29 10:01:57 by yokten           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,10 @@ INC		=	minishell.
 CFLAGS	=	-Wall -Wextra -Werror -g #-g -fsanitize=address
 RM		=	rm -rf
 LIBS += -lreadline
+LIB 	= /lib/.minishell
+RL_FLAGS = -L./lib/readline/lib
+RL_INCS = -I./lib/readline/include
+
 
 SRCS	=	main.c				\
 			lexer_list.c		\
@@ -41,12 +45,15 @@ B = "\033[34m"
 
 all: $(NAME)
 
-$(NAME): $(OBJS) $(LIBFT)
+$(NAME): $(OBJS) $(LIBFT) $(LIB)
 	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(LIBS) -o $(NAME) -lreadline
 	@echo $(G)"[✓] "$(B)"minishell"
 
 $(LIBFT) : 
 	@make -C libft
+
+$(LIB) :
+	@make -C lib/
 
 %.o: %.c $(INC)
 	@$(CC) -c $< -o $@ $(CFLAGS)
@@ -57,6 +64,7 @@ clean:
 fclean: clean
 	@$(RM) $(NAME)
 	@make fclean -C libft
+	@make fclean -C lib/
 
 re:	fclean all
 

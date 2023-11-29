@@ -18,7 +18,6 @@ void ft_redirections(t_core *core)
 	}
 	else if (!ft_strncmp(core->lexer->content, "<", 1))
 	{
-		write(1, "TESTERaa\n", 7);
 		input(core);
 	}
 }
@@ -61,7 +60,6 @@ void	heredoc(t_core	*core)
 		write(core->heredoc_fd[1], "\n", 1);
 		free(input);
 	}
-	close(core->heredoc_fd[1]);
 }
 void	input(t_core *core)
 {
