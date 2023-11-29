@@ -6,7 +6,7 @@
 #    By: yokten <yokten@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/06 20:04:22 by yokten            #+#    #+#              #
-#    Updated: 2023/11/29 15:43:31 by yokten           ###   ########.fr        #
+#    Updated: 2023/11/29 16:21:31 by yokten           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ RL_INCS = --I. -I ./lib/readline/include
 SRCS	=	main.c				\
 			lexer_list.c		\
 			error_handling.c	\
-			malloc.c			\
+			init.c				\
 			builtins.c			\
 			builtins2.c			\
 			env_list.c 			\
@@ -34,6 +34,7 @@ SRCS	=	main.c				\
 			pipe.c				\
 			redirections.c		\
 			signals.c			\
+			leximus.c			\
 
 CC = @gcc
 NAME = minishell

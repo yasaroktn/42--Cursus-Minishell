@@ -6,7 +6,7 @@
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 20:03:17 by yokten            #+#    #+#             */
-/*   Updated: 2023/11/29 11:22:56 by yokten           ###   ########.fr       */
+/*   Updated: 2023/11/29 16:21:55 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # include <errno.h>
 # include <string.h>
 # include <signal.h>
-#include <termios.h>
+# include <termios.h>
 # include "structs.h"
 # include "libft/libft.h"
 # include <readline/readline.h>
@@ -42,10 +42,10 @@ void		env_lstadd_back(t_env **lst, t_env *new);
 void		export_lstadd_back(t_export **lst, t_export *new);
 void		ft_error_handling(t_core *core, int flag);
 void		init_core(t_core *core);
-void		ft_echo_management(t_core	*core);
-void		ft_exit_management(t_core	*core);
-void		ft_pwd_management(t_core	*core);
-void		ft_env_management(t_core	*core);
+void		ft_echo_management(t_core *core);
+void		ft_exit_management(t_core *core);
+void		ft_pwd_management(t_core *core);
+void		ft_env_management(t_core *core);
 void		ft_export_management(t_core	*core);
 void		env_and_exp(t_core	*core);
 void		add_to_export(t_core	*core);
@@ -54,27 +54,28 @@ void		ft_chdir(t_core	*core);
 void		add_export_env(t_core	*core);
 void		expander(t_core *core);
 void		init_list(t_core *g_core);
-void		add_export (t_core	*core);
+void		add_export(t_core	*core);
 void		print_export(t_core	*core);
 void		ft_exec(t_core	*core);
 void		add_env(t_core	*core);
 int			echo_n_control(t_core *core);
-void		ft_access (t_core	*core);
+void		ft_access(t_core	*core);
 void		ft_builtins(t_core *core);
 int			ft_strchr(const char *s, int c);
-void    	childforexec(t_core *core);
-void 		ft_redirections(t_core *core);
-void 		create_file(t_core *core,int mode);
+void		childforexec(t_core *core);
+void		ft_redirections(t_core *core);
+void		create_file(t_core *core, int mode);
 void		heredoc(t_core	*core);
-void 		input(t_core *core);
+void		input(t_core *core);
 void		signal_handler(int sig);
 void		init_signal(void);
+void		ft_exit_management(t_core *core);
+void		leximus(t_core *core);
+int			check_operator(t_core *core);
+int			control_quote(t_core *core);
+int			check_redirection(t_core *core);
+int			check_q(t_core *core);
+void		init_temp(char	**env, t_core *core);
+void		init_list(t_core *g_core);
 
-//void 	delete_file(t_core *core)
-
-//void    childforpipe(t_core *core, int flag);
 #endif
-
-
-// 954e4a17b4f63bdb8f9db5dab05a0c3bfad61bb6 
-

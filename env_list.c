@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   env_list.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/29 15:49:13 by yokten            #+#    #+#             */
+/*   Updated: 2023/11/29 15:49:32 by yokten           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 t_env	*env_listnew(char *content)
@@ -54,7 +66,7 @@ void	export_lstadd_back(t_export **lst, t_export *new)
 	tmp ->next = new;
 }
 
-void	add_export (t_core	*core)
+void	add_export(t_core	*core)
 {
 	core->export_head = core->export;
 	core->i = 0;

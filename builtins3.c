@@ -6,7 +6,7 @@
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 20:03:57 by yokten            #+#    #+#             */
-/*   Updated: 2023/11/18 13:16:31 by yokten           ###   ########.fr       */
+/*   Updated: 2023/11/29 16:14:35 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,38 @@ void	ft_env_management(t_core	*core)
 		core->env = core->env->next;
 	}
 	core->env = core->env_head;
+}
+
+void	ft_exit_management(t_core *core)
+{
+	core->i = 0;
+	if (core->lexer->next != NULL)
+	{
+		core->lexer = core->lexer->next;
+		if (!exit_control(core))
+		{
+			core->err_code = 255;
+			printf("exit : %s: numaric argument required\n",
+				core->lexer->content);
+			exit(0);
+		}
+		else if (core->lexer->next != NULL && core->lexer->type == 2)
+		{
+			printf("exit: too many arguments\n");
+			core->err_code = 1;
+		}
+		else if (exit_control(core))
+		{
+			core->err_code = ft_atoi(core->lexer->content);
+			if (core->err_code > 255)
+				core->err_code = 255;
+			printf("exit\n");
+			exit(0);
+		}
+	}
+	else
+	{
+		printf("exit\n");
+		exit(0);
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 13:37:31 by yokten            #+#    #+#             */
-/*   Updated: 2023/11/29 15:48:15 by yokten           ###   ########.fr       */
+/*   Updated: 2023/11/29 16:14:22 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ void	ft_builtins(t_core *core)
 
 	core->input = core->lexer->content;
 	i = 0;
-		while (commands[i] != NULL && ft_strncmp(core->input,
-		commands[i], ft_strlen(commands[i])) && i < 7)
+	while (commands[i] != NULL && ft_strncmp(core->input,
+			commands[i], ft_strlen(commands[i])) && i < 7)
 		++i;
 	function_array[i](core);
 }
@@ -97,38 +97,4 @@ int	exit_control(t_core *core)
 		return (1);
 	else
 		return (0);
-}
-
-void	ft_exit_management(t_core *core)
-{
-	core->i = 0;
-	if (core->lexer->next != NULL)
-	{
-		core->lexer = core->lexer->next;
-		if (!exit_control(core))
-		{
-			core->err_code = 255;
-			printf("exit : %s: numaric argument required\n",
-				core->lexer->content);
-			exit(0);
-		}
-		else if (core->lexer->next != NULL && core->lexer->type == 2)
-		{
-			printf("exit: too many arguments\n");
-			core->err_code = 1;
-		}
-		else if (exit_control(core))
-		{
-			core->err_code = ft_atoi(core->lexer->content);
-			if (core->err_code > 255)
-				core->err_code = 255;
-			printf("exit\n");
-			exit(0);
-		}
-	}
-	else
-	{
-		printf("exit\n");
-		exit(0);
-	}
 }

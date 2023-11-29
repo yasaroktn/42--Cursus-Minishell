@@ -6,7 +6,7 @@
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 20:04:30 by yokten            #+#    #+#             */
-/*   Updated: 2023/11/29 14:43:41 by yokten           ###   ########.fr       */
+/*   Updated: 2023/11/29 16:06:16 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,55 +48,55 @@ typedef struct s_export
 
 typedef struct s_core
 {
-	char			*input;
-	t_lexer			*lexer;
-	t_lexer			*lexer_head;
-	t_env			*env;
-	t_env			*env_head;
-	t_export		*export;
-	t_export		*export_head;
-	pid_t			*pid;
-	char			**expanded;
-	char			**res;
-	char			**arg;
-	char 			**env2;
-	int				i;
-	int				j;
-	int				k;
-	int				l;
-	int				t;
-	int				p;
-	int				s;
-	int 			z;
-	int				pipes[2];
-	int				pipes2[2];
-	int				lex_flag;
-	int				control34;
-	int				control39;
-	int				exp_env_size;
-	int				flag;
-	int				flag1;
-	int				flag2;
-	int				flag3;
-	int				flag4;
-	int				flag5;
-	int				child;
-	int				err_code;
-	char			*tmp_joined;
-	char			*pwd;
-	char			*readline;
-	char			**tmp;
-	char			*e_tmp;
-	char			**exp_env;
-	char			*swap;
-	char			*expander;
-	int				default_out;
-	int 			process_iterator;
-	int 			exec_fd;
-	int 			fd[2];
-	int 			heredoc_fd[2];
+	char		*input;
+	t_lexer		*lexer;
+	t_lexer		*lexer_head;
+	t_env		*env;
+	t_env		*env_head;
+	t_export	*export;
+	t_export	*export_head;
+	pid_t		*pid;
+	char		**expanded;
+	char		**res;
+	char		**arg;
+	char		**env2;
+	int			i;
+	int			j;
+	int			k;
+	int			l;
+	int			t;
+	int			p;
+	int			s;
+	int			z;
+	int			pipes[2];
+	int			pipes2[2];
+	int			lex_flag;
+	int			control34;
+	int			control39;
+	int			exp_env_size;
+	int			flag;
+	int			flag1;
+	int			flag2;
+	int			flag3;
+	int			flag4;
+	int			flag5;
+	int			child;
+	int			err_code;
+	int			default_out;
+	int			process_iterator;
+	int			exec_fd;
+	int			fd[2];
+	int			heredoc_fd[2];
+	char		*tmp_joined;
+	char		*pwd;
+	char		*readline;
+	char		**tmp;
+	char		*e_tmp;
+	char		**exp_env;
+	char		*swap;
+	char		*expander;
 }	t_core;
 
-typedef void (*t_functionPointer)(t_core *core);
+typedef void	(*t_functionPointer)(t_core *core);
 
 #endif
