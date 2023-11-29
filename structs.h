@@ -6,7 +6,7 @@
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 20:04:30 by yokten            #+#    #+#             */
-/*   Updated: 2023/11/29 11:42:35 by yokten           ###   ########.fr       */
+/*   Updated: 2023/11/29 14:43:41 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,5 +96,7 @@ typedef struct s_core
 	int 			fd[2];
 	int 			heredoc_fd[2];
 }	t_core;
+
+typedef void (*t_functionPointer)(t_core *core);
 
 #endif

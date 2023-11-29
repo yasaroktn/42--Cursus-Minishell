@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   builtins2.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/29 14:44:47 by yokten            #+#    #+#             */
+/*   Updated: 2023/11/29 15:09:03 by yokten           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "./minishell.h"
 
@@ -14,18 +25,17 @@ void	ft_chdir(t_core	*core)
 {
 	core->i = 0;
 	core->pwd = ft_strjoin("\033[0;35m", getcwd(core->pwd, 0));
-
 	if (core->lexer->next)
 		core->lexer = core->lexer->next;
 	if (core->lexer && core->lexer->type == 2)
 		core->i = chdir(core->lexer->content);
 	else if (!core->lexer->next)
-		core->i = chdir("/Users/sisen"/*yokten*/);
+		core->i = chdir("/Users/yokten");
 	else if (core->lexer->next && core->lexer->next->type == 2)
 		printf("cd: too many arguments\n");
 	if (core->i < 0)
-		printf("cd: no such file or directory: %s\n"
-			, core->lexer->content);
+		printf("cd: no such file or directory: %s\n",
+			core->lexer->content);
 	core->pwd = ft_strjoin("\033[0;35m", getcwd(core->pwd, 0));
 	core->readline = ft_strjoin(core->pwd, " > monkeys 🙉🙊🙈 :\033[0;37m ");
 }
@@ -38,17 +48,17 @@ void	print_export(t_core	*core)
 		while (core->export->next)
 		{
 			if (core->export->content[0] > core->export->next->content[0])
-			{				
+			{
 				core->e_tmp = core->export->next->content;
 				core->export->next->content = core->export->content;
 				core->export->content = core->e_tmp;
 			}
-			core->export = core->export->next; 
+			core->export = core->export->next;
 		}
 		core->export = core->export_head;
 	}
 	core->i = 0;
-	while(core->export)
+	while (core->export)
 	{
 		printf("declare -x ");
 		while (core->export->content[core->i])
@@ -95,15 +105,15 @@ void	add_export_env(t_core	*core)
 {
 	core->lexer = core->lexer->next;
 	core->l = 0;
-		export_lstadd_back(&core->export,
-				export_listnew(ft_strdup(core->lexer->content)));
- 	while (core->lexer->content[core->l])
+	export_lstadd_back(&core->export,
+		export_listnew(ft_strdup(core->lexer->content)));
+	while (core->lexer->content[core->l])
 	{
 		if (core->lexer->content[core->l] == '=')
 		{
 			env_lstadd_back(&core->env,
 				env_listnew(ft_strdup(core->lexer->content)));
-			break;
+			break ;
 		}
 		core->l++;
 	}

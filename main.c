@@ -6,7 +6,7 @@
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 20:08:49 by yokten            #+#    #+#             */
-/*   Updated: 2023/11/29 11:39:57 by yokten           ###   ########.fr       */
+/*   Updated: 2023/11/29 15:42:14 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -259,7 +259,7 @@ int	main(int argc, char **argv, char **env)
 		if (g_core->input)
 		{
 			if (!control_quote(g_core))
-				printf("tırnak hatası");
+				printf("Quote Error\n");
 			leximus(g_core);
 		}
 		g_core->flag1 = 0;

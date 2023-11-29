@@ -6,7 +6,7 @@
 #    By: yokten <yokten@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/06 20:04:22 by yokten            #+#    #+#              #
-#    Updated: 2023/11/29 13:35:00 by yokten           ###   ########.fr        #
+#    Updated: 2023/11/29 15:43:31 by yokten           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,6 @@ INC		=	minishell.
 CFLAGS	=	-Wall -Wextra -Werror -g #-g -fsanitize=address
 RM		=	rm -rf
 LIBS += -lreadline
-LIB 	= /lib/.minishell
 RL_FLAGS= -lft -L $(LIBFT) $(LIBS) -L ./lib/readline/lib
 RL_INCS = --I. -I ./lib/readline/include
 
@@ -64,7 +63,6 @@ $(NAME): $(OBJS)  $(LIBFT)
 fclean: clean
 	$(RM) $(NAME)
 	@make fclean -C libft
-	@make fclean -C lib/
 	@rm -rf readline-8.2 readline-8.2.tar.gz
 
 git:
