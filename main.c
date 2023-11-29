@@ -6,7 +6,7 @@
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 20:08:49 by yokten            #+#    #+#             */
-/*   Updated: 2023/11/28 22:12:24 by yokten           ###   ########.fr       */
+/*   Updated: 2023/11/29 11:39:57 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -243,15 +243,17 @@ int	main(int argc, char **argv, char **env)
 	init_list(g_core);
 	init_temp(env, g_core);
 	init_core(g_core);
+	init_signal();
 	(void)argc;
 	(void)argv;
 	g_core->default_out = dup(1);
-	g_core->readline = ft_strjoin(g_core->pwd, " > monkeys 🙉🙊🙈 :\033[0;37m ");
+	g_core->readline = ft_strjoin(g_core->pwd, " > monkey :\033[0;37m ");
 	while (1)
 	{
 		init_core(g_core);
 		g_core->input = readline(g_core->readline);
-		
+		if (!g_core->input)
+			exit (1);
 		if (g_core->input != NULL)
 			add_history(g_core->input);
 		if (g_core->input)

@@ -38,6 +38,13 @@ void create_file(t_core *core,int mode)
 	close(fd);
 }
 
+void	ft_ctrl(int signal)
+{
+	printf("\n");
+	(void)signal;
+	exit(errno);
+}
+
 void	heredoc(t_core	*core)
 {
 	char	*input;
@@ -47,20 +54,39 @@ void	heredoc(t_core	*core)
 	core->flag4 = 1;
 	if (pipe(core->heredoc_fd) == -1)
 		perror("heredoc err");
+	 signal(SIGINT, ft_ctrl);
 	while (1)
 	{
 		input = readline("> ");
+		if (core->lexer->next->next && (!ft_strncmp(core->lexer->next->next->content, "<<", 2)))
+		{
+			printf("%s\n", core->lexer->next->content);
+			printf(" input : %s\n", input);
+			if (!ft_strncmp(core->lexer->next->content, input, ft_strlen(core->lexer->next->content)))
+			{
+				printf("girseydim\n");
+				core->lexer = core->lexer->next->next;
+			}
+			heredoc(core);
+			break;
+		}
 		if (!input || (!ft_strncmp(input, core->lexer->next->content, ft_strlen(core->lexer->next->content))
 				&& ft_strlen(input) == ft_strlen( core->lexer->next->content)))
 		{
+			printf("%s\n", core->lexer->next->content);
+			printf("girdim\n");
 			free(input);
 			break;
 		}
-		write(core->heredoc_fd[1], input, ft_strlen(input));
-		write(core->heredoc_fd[1], "\n", 1);
-		free(input);
+		else
+		{
+			write(core->heredoc_fd[1], input, ft_strlen(input));
+			write(core->heredoc_fd[1], "\n", 1);
+			free(input);
+		}
 	}
 }
+
 void	input(t_core *core)
 {
 	int	fd;

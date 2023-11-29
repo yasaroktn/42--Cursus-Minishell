@@ -6,7 +6,7 @@
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:41:40 by yokten            #+#    #+#             */
-/*   Updated: 2023/11/29 09:56:54 by yokten           ###   ########.fr       */
+/*   Updated: 2023/11/29 11:51:07 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	ft_exec(t_core	*core)
 	pid = fork();
 	if (pid == 0)
 	{
+		core->flag5 = 1;
 		if (core->process_iterator != 0)
 		{
 			dup2(core->exec_fd, 0);
@@ -38,7 +39,8 @@ void	ft_exec(t_core	*core)
 		}
 		close(io[0]);
 		close(io[1]);
-		ft_access(core);
+		ft_access(core); 
+		clear_history();
 		if (!ft_strncmp(core->lexer->content, "<<", 2))
 		{
 			//close(core->heredoc_fd[1]);
@@ -47,6 +49,7 @@ void	ft_exec(t_core	*core)
 		}
 		execve(core->res[core->j], core->arg, core->env2);
 	}
+	core->flag5 = 0;
 	if (core->process_iterator != 0)
 		close(core->exec_fd);
 	close(io[1]);

@@ -6,7 +6,7 @@
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 20:04:30 by yokten            #+#    #+#             */
-/*   Updated: 2023/11/29 03:30:19 by yokten           ###   ########.fr       */
+/*   Updated: 2023/11/29 11:42:35 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ typedef struct s_core
 	int				flag2;
 	int				flag3;
 	int				flag4;
+	int				flag5;
 	int				child;
 	int				err_code;
 	char			*tmp_joined;

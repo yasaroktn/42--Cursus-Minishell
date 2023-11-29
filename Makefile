@@ -6,7 +6,7 @@
 #    By: yokten <yokten@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/06 20:04:22 by yokten            #+#    #+#              #
-#    Updated: 2023/11/29 10:04:14 by yokten           ###   ########.fr        #
+#    Updated: 2023/11/29 13:34:03 by yokten           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,8 +17,8 @@ CFLAGS	=	-Wall -Wextra -Werror -g #-g -fsanitize=address
 RM		=	rm -rf
 LIBS += -lreadline
 LIB 	= /lib/.minishell
-RL_FLAGS = -L./lib/readline/lib
-RL_INCS = -I./lib/readline/include
+RL_FLAGS= -lft -L $(LIBFT) $(LIBS) -L ./lib/readline/lib
+RL_INCS = --I. -I ./lib/readline/include
 
 
 SRCS	=	main.c				\
@@ -34,39 +34,36 @@ SRCS	=	main.c				\
 			exec.c 				\
 			pipe.c				\
 			redirections.c		\
+			signals.c			\
 
+CC = @gcc
+NAME = minishell
+CFLAGS = -Wall -Wextra -Werror
+RM = @rm -rf
+LIBFT = libft/libft.a
 OBJS = $(SRCS:.c=.o)
 
-LIBFT = libft/libft.a
-Y = "\033[33m"
-R = "\033[31m"
-G = "\033[32m"
-B = "\033[34m"
+READLINE = readline
 
-all: $(NAME)
+all: $(READLINE) $(NAME)
 
-$(NAME): $(OBJS) $(LIBFT) $(LIB)
-	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(LIBS) -o $(NAME) -lreadline
-	@echo $(G)"[✓] "$(B)"minishell"
+$(READLINE):
+	curl -O https://ftp.gnu.org/gnu/readline/readline-8.2.tar.gz
+	tar -xvf readline-8.2.tar.gz
+	cd readline-8.2 && ./configure --prefix=${PWD}/readline
+	cd readline-8.2 && make install
 
-$(LIBFT) : 
+
+$(NAME): $(OBJS)  $(LIBFT)
+	$(CC) -o $(NAME) $(OBJS)  $(LIBFT) $(CFLAGS) -L${PWD}/readline/lib  -I${PWD}/readline/include/ -lreadline
+
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@ -I${PWD}/readline/include/
+  $(LIBFT) : 
 	@make -C libft
-
-$(LIB) :
-	@make -C lib/
-
-%.o: %.c $(INC)
-	@$(CC) -c $< -o $@ $(CFLAGS)
-
-clean:
-	@$(RM) $(OBJS)
-
 fclean: clean
-	@$(RM) $(NAME)
-	@make fclean -C libft
-	@make fclean -C lib/
-
-re:	fclean all
+	$(RM) $(NAME)
+	@rm -rf readline-8.2 readline-8.2.tar.gz
 
 git:
 	@make fclean
@@ -74,4 +71,9 @@ git:
 	git commit -m "auto commit"
 	git push
 
-.PHONY: all, clean, fclean, re
+clean:
+	$(RM) $(OBJS)
+
+re: fclean all
+
+.PHONY: all fclean clean re
