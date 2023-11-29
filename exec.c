@@ -6,7 +6,7 @@
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:41:40 by yokten            #+#    #+#             */
-/*   Updated: 2023/11/28 22:24:41 by yokten           ###   ########.fr       */
+/*   Updated: 2023/11/29 03:10:23 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	ft_exec(t_core	*core)
 	pid_t pid;
 	int io[2];
 	pipe(io);
-/* 	char *string[] = {"cat", "a.txt", NULL}; */
 	pid = fork();
 	if (pid == 0)
 	{
@@ -39,15 +38,6 @@ void	ft_exec(t_core	*core)
 		}
 		close(io[0]);
 		close(io[1]);
-/* 		if (!ft_strncmp(core->lexer_head->content, "cat", 3))
-		{
-			execve("/bin/cat", string, core->env2);
-			printf("error\n %s \n %s\n", string[1], string[0]);
-		}
-		else */
-		/* char *yarra = "";
-		read(STDIN_FILENO, yarra, 100000);
-		printf("%s\n", yarra); */
 		ft_access(core);
 		execve(core->res[core->j], core->arg, core->env2);
 	}
