@@ -15,7 +15,8 @@ void	init_core(t_core *core)
 	core->flag = 0;
 	core->flag1 = 0;
 	core->flag2 = 0;
-	core->flag = 0;
+	core->flag4 = 0;
+	
 	core->lex_flag = 0;
 	core->err_code = 0;
 	core->exec_fd = 0;

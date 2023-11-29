@@ -6,7 +6,7 @@
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 20:04:30 by yokten            #+#    #+#             */
-/*   Updated: 2023/11/27 21:07:37 by yokten           ###   ########.fr       */
+/*   Updated: 2023/11/29 03:30:19 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ typedef struct s_core
 	int				flag1;
 	int				flag2;
 	int				flag3;
+	int				flag4;
 	int				child;
 	int				err_code;
 	char			*tmp_joined;
@@ -91,7 +92,8 @@ typedef struct s_core
 	int				default_out;
 	int 			process_iterator;
 	int 			exec_fd;
-	int fd[2];
+	int 			fd[2];
+	int 			heredoc_fd[2];
 }	t_core;
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 20:03:17 by yokten            #+#    #+#             */
-/*   Updated: 2023/11/27 18:05:38 by yokten           ###   ########.fr       */
+/*   Updated: 2023/11/29 03:27:14 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ int		ft_strchr(const char *s, int c);
 void    childforexec(t_core *core);
 void 	ft_redirections(t_core *core);
 void 	create_file(t_core *core,int mode);
-void input(t_core *core);
+void	heredoc(t_core	*core);
+void 	input(t_core *core);
 
 //void 	delete_file(t_core *core)
 
