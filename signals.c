@@ -6,13 +6,13 @@
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 10:04:54 by yokten            #+#    #+#             */
-/*   Updated: 2023/11/29 16:04:24 by yokten           ###   ########.fr       */
+/*   Updated: 2023/11/30 01:56:24 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	ft_termios(void)
+/* static void	ft_termios(void)
 {
 	struct termios	termios_p;
 
@@ -21,8 +21,8 @@ static void	ft_termios(void)
 	termios_p.c_lflag &= ~ECHOCTL;
 	if (tcsetattr(0, 0, &termios_p) != 0)
 		perror("Minishell: tcsetattr");
-}
-
+} */
+/* 
 void	signal_handler(int sig)
 {
 	if (sig == SIGINT)
@@ -32,17 +32,26 @@ void	signal_handler(int sig)
 		rl_replace_line("", 0);
 		rl_redisplay();
 	}
-}
-
-static void	handle_sigquit(int sig)
-{
-	(void)sig;
-	rl_redisplay();
-}
+	else if (sig == EOF)
+	{
+		printf("\n");
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
+	}
+	else if (sig == SIGQUIT)
+	{
+		printf("\n");
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
+	}
+} */
 
 void	init_signal(void)
 {
-	ft_termios();
-	signal(SIGINT, (void (*)(int))signal_handler);
-	signal(SIGQUIT, (void (*)(int))handle_sigquit);
+	/* ft_termios();
+	signal(SIGINT, signal_handler);
+	signal(SIGQUIT, signal_handler);
+	signal(EOF, signal_handler); */
 }

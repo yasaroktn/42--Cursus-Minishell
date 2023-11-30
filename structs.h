@@ -6,7 +6,7 @@
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 20:04:30 by yokten            #+#    #+#             */
-/*   Updated: 2023/11/29 16:06:16 by yokten           ###   ########.fr       */
+/*   Updated: 2023/11/30 11:26:25 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ typedef struct s_export
 typedef struct s_core
 {
 	char		*input;
+	char		*l_input;
+	char		*h_input;
 	t_lexer		*lexer;
 	t_lexer		*lexer_head;
 	t_env		*env;
@@ -60,6 +62,7 @@ typedef struct s_core
 	char		**res;
 	char		**arg;
 	char		**env2;
+	char		*s_content;
 	int			i;
 	int			j;
 	int			k;
@@ -95,6 +98,11 @@ typedef struct s_core
 	char		**exp_env;
 	char		*swap;
 	char		*expander;
+	char		*mem_addr;
+	long long	*ptr_input;
+	long long	*ptr_readline;
+	void		*ptr_lexer;
+	char		*addr_str;
 }	t_core;
 
 typedef void	(*t_functionPointer)(t_core *core);

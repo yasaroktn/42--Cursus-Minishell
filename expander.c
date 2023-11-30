@@ -6,7 +6,7 @@
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 15:03:54 by sisen             #+#    #+#             */
-/*   Updated: 2023/11/29 15:57:03 by yokten           ###   ########.fr       */
+/*   Updated: 2023/11/30 12:33:34 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	expander(t_core	*core)
 {
 	core->k = 0;
-	while (core->lexer->content[core->k])
+	while (core->lexer && core->lexer->content[core->k])
 	{
 		if (core->lexer->content[core->k] == '$')
 		{

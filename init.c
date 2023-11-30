@@ -6,7 +6,7 @@
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 15:57:32 by yokten            #+#    #+#             */
-/*   Updated: 2023/11/29 16:21:18 by yokten           ###   ########.fr       */
+/*   Updated: 2023/11/30 11:46:39 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ void	init_list(t_core *g_core)
 
 void	init_temp(char	**env, t_core *core)
 {
-	while (env[core->t])
+	core->t = 0;
+	while (env[core->t] && env[core->t + 1] && env[core->t] != NULL && env[core->t + 1] != NULL)
 		core->t++;
 	core->tmp = malloc(sizeof(char *) * (core->t + 1));
 	core->t = -1;
@@ -57,5 +58,6 @@ void	init_core(t_core *core)
 	core->process_iterator = 0;
 	core->swap = NULL;
 	core->expanded = NULL;
+	core->input = NULL;
 	core->pwd = ft_strjoin("\033[0;35m", getcwd(core->pwd, 0));
 }

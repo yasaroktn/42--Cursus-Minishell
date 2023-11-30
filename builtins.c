@@ -6,7 +6,7 @@
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 13:37:31 by yokten            #+#    #+#             */
-/*   Updated: 2023/11/29 16:14:22 by yokten           ###   ########.fr       */
+/*   Updated: 2023/11/30 12:18:19 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,22 +33,6 @@ void	ft_unset_management(t_core *core)
 	}
 }
 
-void	ft_builtins(t_core *core)
-{
-	const t_functionPointer	function_array[] = {ft_echo_management,
-		ft_unset_management, ft_exit_management, ft_pwd_management,
-		ft_env_management, ft_chdir, ft_export_management, childforexec};
-	int						i;
-	const char				*commands[] = {"echo", "unset", "exit",
-		"pwd", "env", "cd", "export", NULL};
-
-	core->input = core->lexer->content;
-	i = 0;
-	while (commands[i] != NULL && ft_strncmp(core->input,
-			commands[i], ft_strlen(commands[i])) && i < 7)
-		++i;
-	function_array[i](core);
-}
 
 int	echo_n_control(t_core *core)
 {
@@ -97,4 +81,23 @@ int	exit_control(t_core *core)
 		return (1);
 	else
 		return (0);
+}
+
+void	ft_builtins(t_core *core)
+{
+	const t_functionPointer	function_array[] = {ft_echo_management,
+		ft_unset_management, ft_exit_management, ft_pwd_management,
+		ft_env_management, ft_chdir, ft_export_management, ft_exec};
+	int						i;
+	const char				*commands[] = {"echo", "unset", "exit",
+		"pwd", "env", "cd", "export", NULL};
+
+	core->l_input = core->lexer->content;
+	i = 0;
+	while (commands[i] != NULL && ft_strncmp(core->input,
+			commands[i], ft_strlen(commands[i])) && i < 7)
+		++i;
+	function_array[i](core);
+	while (core->i++ < core->child + 1)
+			wait(core->pid); 
 }

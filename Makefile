@@ -6,19 +6,19 @@
 #    By: yokten <yokten@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/06 20:04:22 by yokten            #+#    #+#              #
-#    Updated: 2023/11/29 16:21:31 by yokten           ###   ########.fr        #
+#    Updated: 2023/11/30 11:37:17 by yokten           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	=	minishell
 CC		=	gcc
 INC		=	minishell.
-CFLAGS	=	-Wall -Wextra -Werror -g #-g -fsanitize=address
+CFLAGS	=	-g -fsanitize=address -Wall -Wextra -Werror 
 RM		=	rm -rf
 LIBS += -lreadline
 RL_FLAGS= -lft -L $(LIBFT) $(LIBS) -L ./lib/readline/lib
 RL_INCS = --I. -I ./lib/readline/include
-
+#-fsanitize=address
 
 SRCS	=	main.c				\
 			lexer_list.c		\
@@ -27,14 +27,15 @@ SRCS	=	main.c				\
 			builtins.c			\
 			builtins2.c			\
 			env_list.c 			\
-			export.c			\
 			expander.c			\
 			builtins3.c 		\
 			exec.c 				\
-			pipe.c				\
 			redirections.c		\
 			signals.c			\
 			leximus.c			\
+			export.c 			\
+			check.c 			\
+			exit.c				\
 
 CC = @gcc
 NAME = minishell
@@ -55,7 +56,7 @@ $(READLINE):
 
 
 $(NAME): $(OBJS)  $(LIBFT)
-	$(CC) -o $(NAME) $(OBJS)  $(LIBFT) $(CFLAGS) -L${PWD}/readline/lib  -I${PWD}/readline/include/ -lreadline
+	$(CC) -o $(NAME) $(CFLAGS) $(OBJS)  $(LIBFT) -lreadline -L${PWD}/readline/lib  -I${PWD}/readline/include/
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@ -I${PWD}/readline/include/
@@ -64,7 +65,7 @@ $(NAME): $(OBJS)  $(LIBFT)
 fclean: clean
 	$(RM) $(NAME)
 	@make fclean -C libft
-	@rm -rf readline-8.2 readline-8.2.tar.gz
+	@rm -rf readline-8.2 readline-8.2.tar.gz readline
 
 git:
 	@make fclean

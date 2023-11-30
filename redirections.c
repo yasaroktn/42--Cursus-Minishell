@@ -6,7 +6,7 @@
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 15:58:00 by yokten            #+#    #+#             */
-/*   Updated: 2023/11/29 16:01:57 by yokten           ###   ########.fr       */
+/*   Updated: 2023/11/29 18:30:48 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,6 @@ void	ft_ctrl(int signal)
 
 void	heredoc(t_core	*core)
 {
-	char	*input;
-
 	if (core->flag4)
 		close(core->heredoc_fd[0]);
 	core->flag4 = 1;
@@ -62,50 +60,34 @@ void	heredoc(t_core	*core)
 		perror("heredoc err");
 	signal(SIGINT, ft_ctrl);
 	while (1)
-	{
-		input = readline("> ");
-		if (core->lexer->next->next && (
-				!ft_strncmp(core->lexer->next->next->content, "<<", 2)))
-		{
-			printf("%s\n", core->lexer->next->content);
-			printf(" input : %s\n", input);
-			if (!ft_strncmp(core->lexer->next->content, input,
-					ft_strlen(core->lexer->next->content)))
-			{
-				printf("girseydim\n");
-				core->lexer = core->lexer->next->next;
-			}
-			heredoc(core);
-			break ;
-		}
-		if (!input || (!ft_strncmp(input, core->lexer->next->content,
-					ft_strlen(core->lexer->next->content))
-				&& ft_strlen(input) == ft_strlen(core->lexer->next->content)))
-		{
-			printf("%s\n", core->lexer->next->content);
-			printf("girdim\n");
-			free(input);
-			break ;
-		}
-		else
-		{
-			write(core->heredoc_fd[1], input, ft_strlen(input));
-			write(core->heredoc_fd[1], "\n", 1);
-			free(input);
-		}
-	}
+		heredoc_management(core);
 }
 
-void	input(t_core *core)
+void	heredoc_management(t_core	*c)
 {
-	int	fd;
-
-	fd = open(core->lexer->next->content, O_RDONLY, 777);
-	if (fd == -1)
+	c->h_input = readline("> ");
+	if (c->lexer->next->next && (
+			!ft_strncmp(c->lexer->next->next->content, "<<", 2)))
 	{
-		close(fd);
+		if (!ft_strncmp(c->lexer->next->content, c->h_input,
+				ft_strlen(c->lexer->next->content)))
+		{
+			c->lexer = c->lexer->next->next;
+		}
+		heredoc(c);
 		return ;
 	}
-	dup2(fd, STDIN_FILENO);
-	close(fd);
+	if (!c->h_input || (!ft_strncmp(c->h_input, c->lexer->next->content,
+				ft_strlen(c->lexer->next->content))
+			&& ft_strlen(c->h_input) == ft_strlen(c->lexer->next->content)))
+	{
+		free(c->h_input);
+		return ;
+	}
+	else
+	{
+		write(c->heredoc_fd[1], c->h_input, ft_strlen(c->h_input));
+		write(c->heredoc_fd[1], "\n", 1);
+		free(c->h_input);
+	}
 }
