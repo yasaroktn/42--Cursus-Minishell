@@ -5,99 +5,109 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/29 13:37:31 by yokten            #+#    #+#             */
-/*   Updated: 2023/11/30 12:18:19 by yokten           ###   ########.fr       */
+/*   Created: 2023/12/24 03:09:29 by yokten            #+#    #+#             */
+/*   Updated: 2023/12/24 03:09:49 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_unset_management(t_core *core)
+void	ft_exit(t_main *main)
 {
-	core->lexer = core->lexer->next;
-	if (core->lexer->content)
-		core->tmp_joined = ft_strjoin(core->lexer->content, "=");
-	core->i = -1;
-	while (core->tmp[++core->i])
+	if (main->lexer_list->next)
 	{
-		if (!ft_strncmp(core->tmp_joined, core->tmp[core->i],
-				ft_strlen(core->tmp_joined)))
+		if (exit_numeric_control(main->lexer_list->next->content))
 		{
-			while (core->tmp[core->i])
+			if (main->lexer_list->next->next)
+				exit_shell(main, 2);
+			else
 			{
-				core->tmp[core->i] = core->tmp[core->i + 1];
-				core->i++;
+				printf("exit\n");
+				exit(ft_atoi(main->lexer_list->next->content));
 			}
-			return ;
 		}
+		else
+			exit_shell(main, 1);
 	}
+	else
+		exit_shell(main, 0);
 }
 
-
-int	echo_n_control(t_core *core)
+int	echo_n_control(t_main *main)
 {
-	core->i = 1;
-	while (core->lexer->content[core->i])
+	main->a = 1;
+	while (main->lexer_list->content[main->a])
 	{
-		if (core->lexer->content[core->i] != 'n')
+		if (main->lexer_list->content[main->a] != 'n')
 			return (0);
-		core->i++;
+		main->a++;
 	}
 	return (1);
 }
 
-void	ft_echo_management(t_core *core)
+void	ft_echo(t_main *main)
 {
-	core->flag = 1;
-	if (core->lexer->next != NULL)
+	main->flag = 1;
+	if (main->lexer_list->next != NULL)
 	{
-		core->lexer = core->lexer->next;
-		if (!ft_strncmp(core->lexer->content, "-n", 2) && echo_n_control(core))
-			core->flag = 0;
-		while (!ft_strncmp(core->lexer->content, "-n", 2)
-			&& echo_n_control(core))
-			core->lexer = core->lexer->next;
-		while (core->lexer)
+		main->lexer_list = main->lexer_list->next;
+		if (!ft_strncmp(main->lexer_list->content, "-n", 2) \
+		&& echo_n_control(main))
+			main->flag = 0;
+		while (main->lexer_list && \
+		!ft_strncmp(main->lexer_list->content, "-n", 2)
+			&& echo_n_control(main))
+			main->lexer_list = main->lexer_list->next;
+		while (main->lexer_list)
 		{
-			if (core->lexer->type == 2)
-				printf("%s ", core->lexer->content);
-			else if (core->lexer->type == 3)
-				ft_builtins(core);
-			core->lexer = core->lexer->next;
+			if (main->lexer_list->type == ARGUMENT)
+				printf("%s", main->lexer_list->content);
+			else if (main->lexer_list->type == PIPE)
+				ft_builtin(main);
+			main->lexer_list = main->lexer_list->next;
+			if (main->lexer_list && main->lexer_list->type == ARGUMENT)
+				printf(" ");
 		}
 	}
-	if (core->flag == 1)
+	if (main->flag == 1)
 		printf("\n");
 }
 
-int	exit_control(t_core *core)
+void	ft_cd(t_main	*main)
 {
-	core->i = 0;
-	while (ft_isdigit(core->lexer->content[core->i]))
-		core->i++;
-	while (core->lexer->content[core->i] == ' ')
-		core->i++;
-	if (core->lexer->content[core->i] == '\0')
-		return (1);
-	else
-		return (0);
+	main->i = 0;
+	if (main->lexer_list->next)
+		main->lexer_list = main->lexer_list->next;
+	if (main->lexer_list && main->lexer_list->type == ARGUMENT)
+		main->i = chdir(main->lexer_list->content);
+	else if (!main->lexer_list->next)
+		main->i = chdir("/Users/yokten");
+	else if (main->lexer_list->next && main->lexer_list->next->type == ARGUMENT)
+		printf("cd: too many arguments\n");
+	ft_change_dir(main);
+	if (main->i < 0)
+		printf("cd: no such file or directory: %s\n",
+			main->lexer_list->content);
+	free(main->shell_name);
+	main->shell_name = ft_strjoin(main->pwd, " > monkeshell$ ");
 }
 
-void	ft_builtins(t_core *core)
+void	ft_builtin(t_main *main)
 {
-	const t_functionPointer	function_array[] = {ft_echo_management,
-		ft_unset_management, ft_exit_management, ft_pwd_management,
-		ft_env_management, ft_chdir, ft_export_management, ft_exec};
-	int						i;
-	const char				*commands[] = {"echo", "unset", "exit",
-		"pwd", "env", "cd", "export", NULL};
-
-	core->l_input = core->lexer->content;
-	i = 0;
-	while (commands[i] != NULL && ft_strncmp(core->input,
-			commands[i], ft_strlen(commands[i])) && i < 7)
-		++i;
-	function_array[i](core);
-	while (core->i++ < core->child + 1)
-			wait(core->pid); 
+	if (!ft_strcmp(main->lexer_list->content, "exit") && \
+	!main->pipe_count && !main->redir_count)
+		ft_exit(main);
+	else if (!ft_strcmp(main->lexer_list->content, "echo") && \
+	!main->pipe_count && !main->redir_count)
+		ft_echo(main);
+	else if (!ft_strcmp(main->lexer_list->content, "clear"))
+		printf("\033[001;1H\033[2J");
+	else if (!ft_strcmp(main->lexer_list->content, "cd") && \
+	!main->pipe_count && !main->redir_count)
+		ft_cd(main);
+	else if (!ft_strcmp(main->lexer_list->content, "pwd") && \
+	!main->pipe_count && !main->redir_count)
+		ft_pwd(main);
+	else
+		ft_builtin2(main);
 }

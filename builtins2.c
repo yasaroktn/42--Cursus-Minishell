@@ -5,75 +5,79 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/29 14:44:47 by yokten            #+#    #+#             */
-/*   Updated: 2023/11/30 11:54:40 by yokten           ###   ########.fr       */
+/*   Created: 2023/12/24 03:09:41 by yokten            #+#    #+#             */
+/*   Updated: 2023/12/24 03:09:43 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./minishell.h"
+#include "minishell.h"
 
-void	ft_pwd_management(t_core	*core)
+void	ft_pwd(t_main *main)
 {
 	char	*str;
 
 	str = NULL;
-	printf("%s\n", getcwd(str, 0));
-	core->pwd = ft_strjoin("\033[0;35m", getcwd(str, 0));
+	if (main->pwd != NULL)
+		free(main->pwd);
+	main->pwd = getcwd(str, 0);
+	printf("%s\n", main->pwd);
 }
 
-void	ft_chdir(t_core	*core)
+void	ft_env(t_main *main)
 {
-	core->i = 0;
-	core->pwd = ft_strjoin("\033[0;35m", getcwd(core->pwd, 0));
-	if (core->lexer->next)
-		core->lexer = core->lexer->next;
-	if (core->lexer && core->lexer->type == 2)
-		core->i = chdir(core->lexer->content);
-	else if (!core->lexer->next)
-		core->i = chdir("/Users/yokten");
-	else if (core->lexer->next && core->lexer->next->type == 2)
-		printf("cd: too many arguments\n");
-	if (core->i < 0)
-		printf("cd: no such file or directory: %s\n",
-			core->lexer->content);
-	core->pwd = ft_strjoin("\033[0;35m", getcwd(core->pwd, 0));
-}
-
-void	ft_export_management(t_core	*core)
-{
-	core->i = 0;
-	core->k = 0;
-	core->export = core->export_head;
-	if (core->lexer->next == NULL || core->lexer->next->type != 2)
+	main->i = 0;
+	main->env_list = main->env_head;
+	if (main->lexer_list->next && main->lexer_list->next->type == ARGUMENT)
+		printf("env: %s: No such file or directory\n", \
+		main->lexer_list->next->content);
+	else
 	{
-		while (core->export)
+		while (main->env_list)
 		{
-			core->i++;
-			core->export = core->export->next;
+			printf("%s\n", main->env_list->content);
+			main->env_list = main->env_list->next;
 		}
-		core->export = core->export_head;
-		print_export(core);
+		main->env_list = main->env_head;
+	}
+}
+
+void	ft_export(t_main	*main)
+{
+	main->i = 0;
+	main->export_list = main->export_head;
+	if (main->lexer_list->next == NULL || main->lexer_list->next->type != 2)
+	{
+		while (main->export_list)
+		{
+			main->i++;
+			main->export_list = main->export_list->next;
+		}
+		main->export_list = main->export_head;
+		print_export(main);
 	}
 	else
-		add_export_env(core);
+		add_export_env(main);
 }
 
-void	add_export_env(t_core	*core)
+void	print_export(t_main	*main)
 {
-	core->lexer = core->lexer->next;
-	core->l = 0;
-	export_lstadd_back(core->export,
-		export_listnew(ft_strdup(core->lexer->content)));
-	while (core->lexer->content[core->l])
+	main->flag = 0;
+	while (0 < --main->i)
 	{
-		if (core->lexer->content[core->l] == '=')
+		while (main->export_list->next)
 		{
-			env_lstadd_back(&core->env,
-				env_listnew(ft_strdup(core->lexer->content)));
-			break ;
+			if (main->export_list->content[0] > \
+			main->export_list->next->content[0])
+			{
+				main->export_tmp = main->export_list->next->content;
+				main->export_list->next->content = main->export_list->content;
+				main->export_list->content = main->export_tmp;
+			}
+			main->export_list = main->export_list->next;
 		}
-		core->l++;
+		main->export_list = main->export_head;
 	}
-	if (core->lexer->next != NULL && core->lexer->next->type == 2)
-		add_export_env(core);
+	main->i = 0;
+	while (main->export_list)
+		declare_export(main);
 }

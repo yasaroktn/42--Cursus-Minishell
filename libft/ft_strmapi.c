@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/21 06:40:45 by yokten            #+#    #+#             */
-/*   Updated: 2023/01/02 20:04:46 by yokten           ###   ########.fr       */
+/*   Created: 2023/12/24 03:21:12 by yokten            #+#    #+#             */
+/*   Updated: 2023/12/24 03:21:13 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,20 @@
 
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	char	*a;
-	int		i;
+	char	*to_return;
+	size_t	i;
 
-	if (!s || !f)
-		return (0);
+	if (!s)
+		return (NULL);
+	to_return = malloc(sizeof(char) * ft_strlen(s) + 1);
+	if (!to_return)
+		return (NULL);
 	i = 0;
-	a = (char *)malloc ((ft_strlen(s) + 1) * sizeof(char));
-	if (!a)
-		return (0);
-	while (s[i])
+	while (i < ft_strlen(s))
 	{
-		a[i] = f(i, s[i]);
-		i ++ ;
+		to_return[i] = f(i, s[i]);
+		i++;
 	}
-	a[i] = '\0';
-	return (a);
+	to_return[i] = '\0';
+	return (to_return);
 }

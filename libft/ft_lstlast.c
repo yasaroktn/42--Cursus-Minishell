@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/28 11:42:19 by yokten            #+#    #+#             */
-/*   Updated: 2022/12/28 11:47:03 by yokten           ###   ########.fr       */
+/*   Created: 2023/12/24 03:19:10 by yokten            #+#    #+#             */
+/*   Updated: 2023/12/24 03:19:11 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 t_list	*ft_lstlast(t_list *lst)
 {
-	if (lst == 0)
+	if (!lst)
 		return (lst);
-	while (lst->next != 0)
+	while (lst -> next != NULL)
 	{
-		lst = lst->next;
+		lst = lst -> next;
 	}
 	return (lst);
 }

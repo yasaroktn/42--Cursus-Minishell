@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/21 03:00:43 by yokten            #+#    #+#             */
-/*   Updated: 2023/01/02 14:57:38 by yokten           ###   ########.fr       */
+/*   Created: 2023/12/24 03:17:43 by yokten            #+#    #+#             */
+/*   Updated: 2023/12/24 03:17:44 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,13 @@
 
 void	*ft_calloc(size_t count, size_t size)
 {
-	void	*str;
+	void	*space;
 
-	str = malloc(count * size);
-	if (!str)
+	if (count == SIZE_MAX && size == SIZE_MAX)
 		return (0);
-	ft_bzero(str, (count * size));
-	return (str);
+	space = malloc(count * size);
+	if (!space)
+		return (0);
+	ft_memset(space, 0, count * size);
+	return (space);
 }

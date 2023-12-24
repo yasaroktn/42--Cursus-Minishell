@@ -5,21 +5,16 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/12 19:00:41 by yokten            #+#    #+#             */
-/*   Updated: 2022/12/28 16:19:19 by yokten           ###   ########.fr       */
+/*   Created: 2023/12/24 03:21:06 by yokten            #+#    #+#             */
+/*   Updated: 2023/12/24 03:21:07 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlen(const char *c)
+size_t	ft_strlen(const char *s)
 {
-	size_t	i;
-
-	i = 0;
-	while (c[i] != '\0')
-	{
-		i++;
-	}
-	return (i);
+	if (*s)
+		return (1 + ft_strlen(s + 1));
+	return (0);
 }

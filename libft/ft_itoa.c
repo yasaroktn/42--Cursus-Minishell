@@ -5,22 +5,20 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/23 23:01:26 by yokten            #+#    #+#             */
-/*   Updated: 2022/12/29 20:13:58 by yokten           ###   ########.fr       */
+/*   Created: 2023/12/24 03:18:31 by yokten            #+#    #+#             */
+/*   Updated: 2023/12/24 03:18:32 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	len_size(int n)
+static	size_t	ft_nlen(int n)
 {
 	size_t	len;
 
 	len = 0;
 	if (n == 0)
-	{
 		len++;
-	}
 	else if (n < 0)
 	{
 		len++;
@@ -28,36 +26,36 @@ int	len_size(int n)
 	}
 	while (n != 0)
 	{
-		n /= 10 ;
-		len ++;
+		n /= 10;
+		len++;
 	}
 	return (len);
 }
 
 char	*ft_itoa(int n)
 {
-	char	*a;
+	char	*to_return;
+	size_t	size;
 	size_t	i;
-	size_t	len;
 
 	i = 0;
 	if (n == -2147483648)
 		return (ft_strdup("-2147483648"));
-	len = len_size(n);
-	a = malloc((len + 1) * sizeof(char));
-	if (!a)
-		return (0);
+	size = ft_nlen(n);
+	to_return = malloc(sizeof(char) * (size + 1));
+	if (!to_return)
+		return (NULL);
+	to_return[size] = '\0';
 	if (n < 0)
 	{
-		a[0] = 45;
+		to_return[0] = '-';
 		n *= -1;
-		i++;
+		i = 1;
 	}
-	a[len] = '\0';
-	while (i < len--)
+	while (i < size--)
 	{
-		a[len] = (n % 10) + '0';
+		to_return[size] = (n % 10) + '0';
 		n /= 10;
 	}
-	return (a);
+	return (to_return);
 }

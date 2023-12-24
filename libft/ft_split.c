@@ -5,69 +5,56 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/26 16:51:35 by yokten            #+#    #+#             */
-/*   Updated: 2023/01/03 09:16:36 by yokten           ###   ########.fr       */
+/*   Created: 2023/12/24 03:20:26 by yokten            #+#    #+#             */
+/*   Updated: 2023/12/24 03:20:27 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	total_string(char	const *s, char c)
+static	size_t	ft_counter(char const *s, char c)
 {
-	int	i;
+	size_t	counter;
 
-	i = 0;
+	counter = 0;
 	while (*s)
 	{
-		while (*s == c && *s)
+		if (*s != c)
+		{
+			counter++;
+			while (*s && *s != c)
+				s++;
+		}
+		else
 			s++;
-		if (*s == '\0')
-			return (i);
-		while (*s != c && *s)
-			s++;
-		i++;
 	}
-	return (i);
+	return (counter);
 }
 
-static int	total_char(char const *s, char c)
+char	**ft_split(char const *s, char c)
 {
-	int	i;
-
-	i = 0;
-	while (*s != c && *s)
-	{
-		s++;
-		i++;
-	}
-	return (i);
-}
-
-char	**ft_split(char	const	*s, char c)
-{
-	int		x;
-	int		j;
+	int		len;
 	int		i;
-	char	**a;
+	char	**to_return;
 
 	if (!s)
 		return (NULL);
-	x = 0;
-	j = total_string(s, c);
-	a = ft_calloc(j + 1, sizeof(char *));
-	if (!a)
+	i = 0;
+	to_return = malloc(sizeof(char *) * (ft_counter(s, c) + 1));
+	if (!to_return)
 		return (NULL);
 	while (*s)
 	{
-		while (*s && *s == c)
-			s++;
-		if (*s == '\0')
-			break ;
-		i = total_char(s, c);
-		a[x++] = ft_substr(s, 0, i);
-		while (*s != c && *s)
+		if (*s != c)
+		{
+			len = 0;
+			while (*s && *s != c && ++len)
+				s++;
+			to_return[i++] = ft_substr(s - len, 0, len);
+		}
+		else
 			s++;
 	}
-	a[x] = NULL;
-	return (a);
+	to_return[i] = 0;
+	return (to_return);
 }

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/12 18:59:10 by yokten            #+#    #+#             */
-/*   Updated: 2022/12/28 16:38:53 by yokten           ###   ########.fr       */
+/*   Created: 2023/12/24 03:19:47 by yokten            #+#    #+#             */
+/*   Updated: 2023/12/24 03:19:48 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,12 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
 	unsigned char	*d;
 	unsigned char	*s;
-	size_t			i;
 
-	i = 0;
+	if (!dst && !src)
+		return (NULL);
 	d = (unsigned char *)dst;
 	s = (unsigned char *)src;
-	if (n == 0 || dst == src)
-		return (dst);
-	while (i < n)
-	{
-		d[i] = s[i];
-		i++;
-	}
+	while (n--)
+		*d++ = *s++;
 	return (dst);
 }

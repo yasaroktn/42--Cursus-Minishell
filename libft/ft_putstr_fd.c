@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/21 03:00:17 by yokten            #+#    #+#             */
-/*   Updated: 2023/01/02 15:26:44 by yokten           ###   ########.fr       */
+/*   Created: 2023/12/24 03:20:22 by yokten            #+#    #+#             */
+/*   Updated: 2023/12/24 03:20:23 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,8 @@ void	ft_putstr_fd(char *s, int fd)
 	int	i;
 
 	i = 0;
-	if (!s)
+	if (!fd || !s)
 		return ;
 	while (s[i])
-	{
-		write(fd, &s[i], 1);
-		i++;
-	}
+		ft_putchar_fd(s[i++], fd);
 }

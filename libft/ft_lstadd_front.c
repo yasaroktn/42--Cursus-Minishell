@@ -5,15 +5,15 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/28 11:38:07 by yokten            #+#    #+#             */
-/*   Updated: 2022/12/28 11:47:13 by yokten           ###   ########.fr       */
+/*   Created: 2023/12/24 03:18:41 by yokten            #+#    #+#             */
+/*   Updated: 2023/12/24 03:18:42 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstadd_front(t_list	**lst, t_list *new)
+void	ft_lstadd_front(t_list **lst, t_list *new)
 {
-	new->next = *lst;
+	new -> next = *lst;
 	*lst = new;
 }

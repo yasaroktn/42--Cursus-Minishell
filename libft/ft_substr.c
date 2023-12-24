@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/21 02:59:40 by yokten            #+#    #+#             */
-/*   Updated: 2023/11/29 13:36:06 by yokten           ###   ########.fr       */
+/*   Created: 2023/12/24 03:21:41 by yokten            #+#    #+#             */
+/*   Updated: 2023/12/24 03:21:42 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,24 @@
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	char	*a;
+	char	*to_return;
 	size_t	i;
 
-	if (!s)
-		return (0);
-	if (start >= ft_strlen(s))
-		len = 0;
-	if (len > ft_strlen(s + start))
-		len = ft_strlen(s + start);
-	a = ft_calloc((len + 1), sizeof(char));
-	if (!a)
-		return (0);
 	i = 0;
-	while (s[start] && i < len)
+	if (!s)
+		return (NULL);
+	if (ft_strlen(s) <= start)
+		len = 0;
+	else if (ft_strlen(s) - start < len)
+		len = ft_strlen(s) - start;
+	to_return = malloc(len + 1 * sizeof(char));
+	if (!to_return)
+		return (NULL);
+	while (i < len && s[start + i])
 	{
-		a[i] = s[start];
-		start++;
+		to_return[i] = s[start + i];
 		i++;
 	}
-	a[i] = '\0';
-	return (a);
+	to_return[i] = '\0';
+	return (to_return);
 }

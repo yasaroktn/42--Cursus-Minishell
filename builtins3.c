@@ -5,76 +5,59 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/06 20:03:57 by yokten            #+#    #+#             */
-/*   Updated: 2023/11/30 12:49:18 by yokten           ###   ########.fr       */
+/*   Created: 2023/12/24 03:10:02 by yokten            #+#    #+#             */
+/*   Updated: 2023/12/24 03:10:03 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	add_env(t_core	*core)
+void	declare_export(t_main	*main)
 {
-	core->env_head = core->env;
-	core->i = 0;
-	core->env->content = core->tmp[core->i++];
-	core->export->next = NULL;
-	while (core->tmp[core->i])
+	printf("declare -x ");
+	while (main->export_list->content[main->i])
 	{
-		if (core->tmp[core->i])
-			env_lstadd_back(&core->env,
-				env_listnew(ft_strdup(core->tmp[core->i])));
-		if (core->env->next != NULL)
-			core->env = core->env->next;
-		core->i++;
+		printf("%c", main->export_list->content[main->i]);
+		if (main->export_list->content[main->i] == '=')
+		{
+			main->flag = 1;
+			printf("%c", 34);
+		}
+		main->i++;
+		if (main->export_list->content[main->i] == '\0' && main->flag == 1)
+		{
+			printf("%c", 34);
+			main->flag = 0;
+		}
 	}
-	core->env = core->env_head;
+	main->i = 0;
+	main->export_list = main->export_list->next;
+	printf("\n");
 }
 
-void	ft_env_management(t_core	*core)
+void	ft_unset(t_main *main)
 {
-	core->i = 0;
-	core->env = core->env_head;
-	while (core->env)
+	if (main->lexer_list->next)
+		main->lexer_list = main->lexer_list->next;
+	if (main->lexer_list->content)
 	{
-		printf("%s\n", core->env->content);
-		core->env = core->env->next;
-	}
-	core->env = core->env_head;
-}
-
-void	ft_exit_management(t_core *core)
-{
-	core->i = 0;
-	if (core->lexer->next != NULL)
-		find_err_code(core);
-	else
-	{
-		printf("exit\n");
-		exit(0);
+		main->tmp_joined = ft_strjoin(main->lexer_list->content, "=");
+		delete_node_t_exp(&main->export_head, main->tmp_joined);
+		delete_node_t_env(&main->env_head, main->tmp_joined);
+		free(main->tmp_joined);
 	}
 }
 
-void	find_err_code(t_core	*core)
+int	exit_numeric_control(char *str)
 {
-	core->lexer = core->lexer->next;
-	if (!exit_control(core))
+	int	i;
+
+	i = 0;
+	while (ft_isdigit(str[i]))
 	{
-		core->err_code = 255;
-		printf("exit : %s: numaric argument required\n",
-			core->lexer->content);
-		exit(0);
+		i++;
+		if (str[i] == '\0')
+			return (1);
 	}
-	else if (core->lexer->next != NULL && core->lexer->type == 2)
-	{
-		printf("exit: too many arguments\n");
-		core->err_code = 1;
-	}
-	else if (exit_control(core))
-	{
-		core->err_code = ft_atoi(core->lexer->content);
-		if (core->err_code > 255)
-			core->err_code = 255;
-		printf("exit\n");
-		exit(0);
-	}
+	return (0);
 }

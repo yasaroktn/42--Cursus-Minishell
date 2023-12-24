@@ -5,27 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/06 20:04:30 by yokten            #+#    #+#             */
-/*   Updated: 2023/11/30 11:26:25 by yokten           ###   ########.fr       */
+/*   Created: 2023/12/24 03:13:50 by yokten            #+#    #+#             */
+/*   Updated: 2023/12/24 03:13:53 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
-
-# include <stdio.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include <errno.h>
-# include <string.h>
-# include <sys/types.h>
-# include <sys/wait.h>
-# include <fcntl.h>
-# include <dirent.h>
-# include <signal.h>
-# include <sys/ioctl.h>
 
 typedef struct s_lexer
 {
@@ -44,67 +30,56 @@ typedef struct s_export
 {
 	char			*content;
 	struct s_export	*next;
-}	t_export;
+}	t_exp;
 
-typedef struct s_core
+typedef struct s_main
 {
-	char		*input;
-	char		*l_input;
-	char		*h_input;
-	t_lexer		*lexer;
-	t_lexer		*lexer_head;
-	t_env		*env;
-	t_env		*env_head;
-	t_export	*export;
-	t_export	*export_head;
-	pid_t		*pid;
-	char		**expanded;
-	char		**res;
-	char		**arg;
-	char		**env2;
-	char		*s_content;
-	int			i;
-	int			j;
-	int			k;
-	int			l;
-	int			t;
-	int			p;
-	int			s;
-	int			z;
-	int			pipes[2];
-	int			pipes2[2];
-	int			lex_flag;
-	int			control34;
-	int			control39;
-	int			exp_env_size;
-	int			flag;
-	int			flag1;
-	int			flag2;
-	int			flag3;
-	int			flag4;
-	int			flag5;
-	int			child;
-	int			err_code;
-	int			default_out;
-	int			process_iterator;
-	int			exec_fd;
-	int			fd[2];
-	int			heredoc_fd[2];
-	char		*tmp_joined;
-	char		*pwd;
-	char		*readline;
-	char		**tmp;
-	char		*e_tmp;
-	char		**exp_env;
-	char		*swap;
-	char		*expander;
-	char		*mem_addr;
-	long long	*ptr_input;
-	long long	*ptr_readline;
-	void		*ptr_lexer;
-	char		*addr_str;
-}	t_core;
-
-typedef void	(*t_functionPointer)(t_core *core);
+	char	*input;
+	char	*shell_name;
+	t_lexer	*lexer_list;
+	t_lexer	*lexer_head;
+	t_lexer	*lexer_tmp;
+	t_env	*env_head;
+	t_env	*env_list;
+	t_exp	*export_list;
+	t_exp	*export_head;
+	int		i;
+	int		j;
+	int		a;
+	int		b;
+	int		c;
+	int		l;
+	int		k;
+	int		z;
+	int		x;
+	int		y;
+	int		q;
+	int		r;
+	int		redir_count;
+	int		dollar;
+	int		pipe_count;
+	int		parse_flag;
+	int		single_q;
+	int		double_q;
+	char	*temp_string;
+	char	*tmp;
+	char	*dq_temp;
+	int		flag;
+	char	*pwd;
+	char	*export_tmp;
+	char	**temp_env;
+	int		process_iterator;
+	int		exec_fd;
+	char	**arg;
+	char	**env2;
+	char	**res;
+	char	*tmp_joined;
+	int		io[2];
+	int		heredoc_fd[2];
+	int		*pid;
+	int		heredoc_flag;
+	int		err_no;
+	pid_t	pid2;
+}	t_main;
 
 #endif

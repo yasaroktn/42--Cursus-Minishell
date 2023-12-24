@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/28 11:41:12 by yokten            #+#    #+#             */
-/*   Updated: 2022/12/28 11:47:06 by yokten           ###   ########.fr       */
+/*   Created: 2023/12/24 03:18:58 by yokten            #+#    #+#             */
+/*   Updated: 2023/12/24 03:18:59 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	ft_lstdelone(t_list *lst, void (*del)(void*))
 {
 	if (!lst || !del)
 		return ;
-	del(lst->content);
+	(*del)(lst->content);
 	free(lst);
+	lst = NULL;
 }

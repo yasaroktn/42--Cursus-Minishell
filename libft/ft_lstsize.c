@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/28 15:02:29 by yokten            #+#    #+#             */
-/*   Updated: 2022/12/28 15:03:04 by yokten           ###   ########.fr       */
+/*   Created: 2023/12/24 03:19:26 by yokten            #+#    #+#             */
+/*   Updated: 2023/12/24 03:19:27 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,15 @@
 
 int	ft_lstsize(t_list *lst)
 {
-	int	len;
+	int	lst_len;
 
-	len = 0;
-	while (lst != 0)
+	lst_len = 1;
+	if (!lst)
+		return (0);
+	while (lst -> next != NULL)
 	{
-		lst = lst->next;
-		len++;
+		lst_len++;
+		lst = lst -> next;
 	}
-	return (len);
+	return (lst_len);
 }

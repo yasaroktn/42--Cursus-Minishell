@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/21 06:40:55 by yokten            #+#    #+#             */
-/*   Updated: 2022/12/28 16:39:28 by yokten           ###   ########.fr       */
+/*   Created: 2023/12/24 03:20:47 by yokten            #+#    #+#             */
+/*   Updated: 2023/12/24 03:20:48 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 {
-	unsigned int	i;
+	int	i;
 
-	i = 0;
-	if (!s || !f)
+	if (!s)
 		return ;
+	i = 0;
 	while (s[i])
 	{
 		f(i, &s[i]);

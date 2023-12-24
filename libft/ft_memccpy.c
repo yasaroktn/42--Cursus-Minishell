@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expander.c                                         :+:      :+:    :+:   */
+/*   ft_memccpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/16 15:03:54 by sisen             #+#    #+#             */
-/*   Updated: 2023/11/30 12:33:34 by yokten           ###   ########.fr       */
+/*   Created: 2023/12/24 03:19:31 by yokten            #+#    #+#             */
+/*   Updated: 2023/12/24 03:19:32 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-void	expander(t_core	*core)
+void	*ft_memccpy(void *dst, const void *src, int c, size_t n)
 {
-	core->k = 0;
-	while (core->lexer && core->lexer->content[core->k])
+	unsigned char	*d;
+	unsigned char	*s;
+
+	d = (unsigned char *)dst;
+	s = (unsigned char *)src;
+	while (n--)
 	{
-		if (core->lexer->content[core->k] == '$')
-		{
-			core->k++;
-			if (getenv(&core->lexer->content[core->k]) == NULL)
-				core->lexer->content = "\0";
-			else
-				core->lexer->content = getenv(&core->lexer->content[core->k]);
-			break ;
-		}
-		core->k++;
+		*d = *s;
+		if (*s == (unsigned char)c)
+			return (d + 1);
+		d++;
+		s++;
 	}
+	return (NULL);
 }

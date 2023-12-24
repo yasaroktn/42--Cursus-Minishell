@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   parser3.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/06 20:33:40 by yokten            #+#    #+#             */
-/*   Updated: 2023/11/29 23:22:41 by yokten           ###   ########.fr       */
+/*   Created: 2023/12/24 03:11:52 by yokten            #+#    #+#             */
+/*   Updated: 2023/12/24 03:11:53 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_exit(void)
+void	dollar_manage3(t_main *main, char *string)
 {
-	printf("syntax error!");
-	exit (0);
+	main->lexer_list->content = ft_string_join \
+	(main->lexer_list->content, ft_substr(&string[main->a], 0, 1));
 }

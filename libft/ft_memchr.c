@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/28 11:47:29 by yokten            #+#    #+#             */
-/*   Updated: 2022/12/28 15:03:44 by yokten           ###   ########.fr       */
+/*   Created: 2023/12/24 03:19:36 by yokten            #+#    #+#             */
+/*   Updated: 2023/12/24 03:19:37 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,13 @@
 
 void	*ft_memchr(const void *s, int c, size_t n)
 {
-	unsigned char	*a;
+	unsigned char	*p;
 	size_t			i;
 
-	a = (unsigned char *)s;
-	i = 0;
-	if (!n)
-		return (NULL);
-	while (i < n)
-	{
-		if (a[i] == (unsigned char)c)
-		{
-			return ((void *)&a[i]);
-		}
-		i++;
-	}
-	if (c == '\0')
-	{
-		return ((void *)&a[i]);
-	}
+	i = -1;
+	p = (unsigned char *)s;
+	while (++i < n)
+		if (p[i] == (unsigned char)c)
+			return ((unsigned char *)p + i);
 	return (NULL);
 }
