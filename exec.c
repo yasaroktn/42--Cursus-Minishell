@@ -6,7 +6,7 @@
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 03:10:23 by yokten            #+#    #+#             */
-/*   Updated: 2023/12/24 06:27:30 by yokten           ###   ########.fr       */
+/*   Updated: 2023/12/24 09:19:45 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,19 @@
 void	ft_exec(t_main	*main)
 {
 	pipe(main->io);
-	if (main->lexer_list->content[0] != '\0')
+	main->pid2 = fork();
+	if (main->pid2 < 0)
 	{
-		main->pid2 = fork();
-		if (main->pid2 < 0)
-		{
-			printf("fork error\n");
-			exit(1);
-		}
-		if (main->pid2 == 0)
-			child_process(main);
-		if (main->process_iterator != 0)
-			close(main->exec_fd);
-		close(main->io[1]);
-		main->exec_fd = main->io[0];
-		main->process_iterator++;
+		printf("fork error\n");
+		exit(1);
 	}
+	if (main->pid2 == 0)
+		child_process(main);
+	if (main->process_iterator != 0)
+		close(main->exec_fd);
+	close(main->io[1]);
+	main->exec_fd = main->io[0];
+	main->process_iterator++;
 }
 
 void	ft_access(t_main *main)
@@ -84,7 +81,7 @@ void	parse_path(t_main *main)
 		if (!access(main->res[main->k], F_OK))
 			break ;
 	}
-	if (main->res[main->k] == NULL)
+	if (main->res[main->k] == NULL || !main->lexer_list->content[0])
 		parse_path3(main);
 }
 

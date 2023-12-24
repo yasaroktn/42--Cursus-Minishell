@@ -6,7 +6,7 @@
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 03:11:40 by yokten            #+#    #+#             */
-/*   Updated: 2023/12/24 06:27:30 by yokten           ###   ########.fr       */
+/*   Updated: 2023/12/24 08:23:45 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ void	single_quote_manage(t_main *main)
 		main->i++;
 	}
 	main->i++;
+	if (!main->lexer_list->content)
+		main->lexer_list->content = ft_strdup("");
 }
 
 void	double_quote_manage(t_main *main)

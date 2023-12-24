@@ -6,7 +6,7 @@
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 03:10:15 by yokten            #+#    #+#             */
-/*   Updated: 2023/12/24 06:27:30 by yokten           ###   ########.fr       */
+/*   Updated: 2023/12/24 08:38:55 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ int	error_control(t_main	*main)
 {
 	if (!check_quotes(main))
 		return (0);
-	main->lexer_list = main->lexer_head;
-	if (ft_strchr(";?<>&|", main->lexer_list->content[0]))
+	if (main->lexer_list->content && main->lexer_list->content[0] \
+	&& ft_strchr(";?<>&|", main->lexer_list->content[0]))
 	{
 		err_syntax(main);
 		return (0);
@@ -50,6 +50,7 @@ void	start_shell2(t_main	*main, int status)
 {
 	if (main->input)
 		ft_parser(main);
+	main->lexer_list = main->lexer_head;
 	if (!error_control(main))
 	{
 		free_main(main);
