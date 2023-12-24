@@ -6,7 +6,7 @@
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 03:11:32 by yokten            #+#    #+#             */
-/*   Updated: 2023/12/24 03:11:33 by yokten           ###   ########.fr       */
+/*   Updated: 2023/12/24 06:27:30 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ enum e_TYPE
 	PIPE,
 	COMMAND,
 	ARGUMENT,
-	REDIRECTION
+	REDIR
 };
 
 int		g_signal;

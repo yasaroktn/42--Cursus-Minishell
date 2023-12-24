@@ -6,7 +6,7 @@
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 03:11:40 by yokten            #+#    #+#             */
-/*   Updated: 2023/12/24 03:11:41 by yokten           ###   ########.fr       */
+/*   Updated: 2023/12/24 06:27:30 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	pipe_manage(t_main *main)
 void	redir_manage(t_main *main)
 {
 	main->redir_count++;
-	main->lexer_list->type = REDIRECTION;
+	main->lexer_list->type = REDIR;
 	if (!ft_strncmp(&main->input[main->i], ">>", 2))
 	{
 		main->lexer_list->content = ft_strdup(">>");

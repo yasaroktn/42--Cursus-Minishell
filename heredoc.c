@@ -6,7 +6,7 @@
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 03:10:36 by yokten            #+#    #+#             */
-/*   Updated: 2023/12/24 03:10:37 by yokten           ###   ########.fr       */
+/*   Updated: 2023/12/24 04:59:07 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	start_heredoc(t_main	*main)
 	{
 		input = readline("> ");
 		if (main->lexer_list->next->next && (
-				main->lexer_list->next->next->type == REDIRECTION))
+				!ft_strncmp(main->lexer_list->next->next->content, "<<", 2)))
 		{
 			start_heredoc2(main, input);
 			break ;

@@ -59,6 +59,7 @@
   "files.associations": {
     "istream": "c",
     "memory": "c",
-    "minishell.h": "c"
+    "minishell.h": "c",
+    "sstream": "c"
   }
 }

@@ -6,7 +6,7 @@
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 03:11:59 by yokten            #+#    #+#             */
-/*   Updated: 2023/12/24 03:12:00 by yokten           ###   ########.fr       */
+/*   Updated: 2023/12/24 04:50:57 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,7 @@ void	ft_redirections(t_main *main)
 	if ((!ft_strcmp(main->lexer_list->content, "<<")))
 		heredoc(main);
 	else if (!ft_strcmp(main->lexer_list->content, "<"))
-	{
 		input(main);
-	}
 }
 
 void	create_file(t_main *main, int mode)

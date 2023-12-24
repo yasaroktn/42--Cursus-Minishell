@@ -6,7 +6,7 @@
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 03:11:11 by yokten            #+#    #+#             */
-/*   Updated: 2023/12/24 03:11:12 by yokten           ###   ########.fr       */
+/*   Updated: 2023/12/24 06:30:41 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,29 +38,35 @@ int	check_quotes(t_main	*main)
 	return (1);
 }
 
-int	error_control(t_main *main)
+/* int	error_control(t_main *main)
 {
 	int	i;
 
 	i = 0;
 	if (!check_quotes(main))
 		return (0);
-	if (ft_strchr(";?<>&|", main->input[0]) && main->input[0] != '\0')
+	while (main->input[i] && main->input[i] == ' ')
+		i++;
+	if (ft_strchr(";?<>&|", main->input[i]))
+	{
 		err_syntax(main);
+		return (0);
+	}
 	while (main->input[i] != '\0')
 	{
-		if (main->input[i] == '|' && main->input[i + 1] == '|')
-			err_syntax(main);
 		if (!ft_strncmp(&main->input[i], "<<", 2) \
 		|| !ft_strncmp(&main->input[i], ">>", 2))
 		{
 			if (main->input[i + 2] == '<' || main->input[i + 2] == '>')
+			{
 				err_syntax(main);
+				return (0);
+			}
 		}
 		i++;
 	}
 	return (1);
-}
+} */
 
 void	free_main(t_main *main)
 {
@@ -83,10 +89,7 @@ void	start_shell(t_main *main)
 			add_history(main->input);
 		if (main->input == NULL)
 			exit(1);
-		if (!error_control(main))
-			free_main(main);
-		else
-			start_shell2(main, status);
+		start_shell2(main, status);
 	}
 }
 

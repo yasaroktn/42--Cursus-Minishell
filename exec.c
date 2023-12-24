@@ -6,7 +6,7 @@
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 03:10:23 by yokten            #+#    #+#             */
-/*   Updated: 2023/12/24 03:10:24 by yokten           ###   ########.fr       */
+/*   Updated: 2023/12/24 06:27:30 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	count_args(t_main *main)
 	i = 1;
 	main->lexer_tmp = main->lexer_list;
 	while (main->lexer_list->next && (main->lexer_list->next->type == ARGUMENT
-			|| main->lexer_list->next->type == REDIRECTION))
+			|| main->lexer_list->next->type == REDIR))
 	{
 		i++;
 		main->lexer_list = main->lexer_list->next;
@@ -93,7 +93,7 @@ void	create_arg(t_main *main)
 	main->arg[0] = main->lexer_list->content;
 	main->z = 1;
 	while (main->lexer_list->next && (main->lexer_list->next->type == ARGUMENT
-			|| main->lexer_list->next->type == REDIRECTION))
+			|| main->lexer_list->next->type == REDIR))
 	{
 		main->lexer_list = main->lexer_list->next;
 		if (main->lexer_list->type == ARGUMENT)
@@ -101,30 +101,11 @@ void	create_arg(t_main *main)
 			main->arg[main->z] = main->lexer_list->content;
 			main->z++;
 		}
-		if (main->lexer_list->type == REDIRECTION)
+		if (main->lexer_list->type == REDIR)
 		{
 			ft_redirections(main);
 			break ;
 		}
 	}
 	main->arg[main->z] = NULL;
-}
-
-void	copy_env(t_main *main)
-{
-	main->env_list = main->env_head;
-	main->z = 0;
-	while (main->env_list)
-	{
-		main->env_list = main->env_list->next;
-		main->z++;
-	}
-	main->env2 = malloc(sizeof(char *) * main->z);
-	main->env_list = main->env_head;
-	main->z = 0;
-	while (main->env_list)
-	{
-		main->env2[main->z++] = main->env_list->content;
-		main->env_list = main->env_list->next;
-	}
 }
