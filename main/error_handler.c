@@ -6,7 +6,7 @@
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 03:10:15 by yokten            #+#    #+#             */
-/*   Updated: 2023/12/28 07:50:24 by yokten           ###   ########.fr       */
+/*   Updated: 2023/12/28 15:45:50 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int	error_control(t_main	*main)
 		(!main->lexer_list->next || main->lexer_list->next->type == PIPE))
 		{
 			err_syntax(main);
+			printf("asdasd\n");
 			return (0);
 		}
 		if (main->lexer_list->type == REDIR && \
@@ -47,25 +48,26 @@ int	error_control(t_main	*main)
 
 void	start_shell2(t_main	*main, int status)
 {
+	int	last;
+
 	if (main->input)
 		ft_parser(main);
 	main->lexer_list = main->lexer_head;
-	if (!error_control(main))
-	{
-		free_main(main);
+	if (!error_control(main) && free_main(main))
 		return ;
-	}
 	main->lexer_list = main->lexer_head;
 	while (main->lexer_list != NULL)
 	{
 		if (main->lexer_list->type == COMMAND)
 			ft_builtin(main);
-		waitpid(main->pid2, &status, 0);
 		if (!main->lexer_list || main->lexer_list->next == NULL)
 			break ;
 		main->lexer_list = main->lexer_list->next;
 	}
-	main->err_no = status / 256;
+	while (main->x++ < main->pipe_count + 1)
+		if (waitpid(0, &status, 0) == main->pid2)
+			last = status;
+	main->err_no = last / 256;
 	free_main(main);
 	main->pipe_count = 0;
 	main->redir_count = 0;

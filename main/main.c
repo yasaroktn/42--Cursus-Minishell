@@ -6,7 +6,7 @@
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 03:11:11 by yokten            #+#    #+#             */
-/*   Updated: 2023/12/28 07:50:24 by yokten           ###   ########.fr       */
+/*   Updated: 2023/12/28 15:27:14 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,12 @@ int	check_quotes(t_main	*main)
 	return (1);
 }
 
-void	free_main(t_main *main)
+int	free_main(t_main *main)
 {
 	lex_lstclear(&main->lexer_head);
 	free(main->input);
+	main->input = NULL;
+	return (1);
 }
 
 void	start_shell(t_main *main)

@@ -6,7 +6,7 @@
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 03:11:32 by yokten            #+#    #+#             */
-/*   Updated: 2023/12/28 07:52:57 by yokten           ###   ########.fr       */
+/*   Updated: 2023/12/28 15:07:49 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ void	init_signal(void);
 void	error_code(t_main	*main);
 void	start_shell2(t_main	*main, int status);
 void	start_heredoc(t_main	*main);
-void	free_main(t_main *main);
+int		free_main(t_main *main);
 void	start_heredoc2(t_main	*main, char *input);
 int		exit_numeric_control(char *str);
 void	ft_change_dir(t_main *main);
