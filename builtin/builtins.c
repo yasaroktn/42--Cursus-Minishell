@@ -6,7 +6,7 @@
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 03:09:29 by yokten            #+#    #+#             */
-/*   Updated: 2023/12/28 07:50:24 by yokten           ###   ########.fr       */
+/*   Updated: 2023/12/28 08:04:47 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,8 +101,6 @@ void	ft_builtin(t_main *main)
 	else if (!ft_strcmp(main->lexer_list->content, "echo") && \
 	!main->pipe_count && !main->redir_count)
 		ft_echo(main);
-	else if (!ft_strcmp(main->lexer_list->content, "clear"))
-		printf("\033[001;1H\033[2J");
 	else if (!ft_strcmp(main->lexer_list->content, "cd") && \
 	!main->pipe_count && !main->redir_count)
 		ft_cd(main);
