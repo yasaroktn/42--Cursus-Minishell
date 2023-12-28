@@ -6,7 +6,7 @@
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 03:09:29 by yokten            #+#    #+#             */
-/*   Updated: 2023/12/24 08:20:47 by yokten           ###   ########.fr       */
+/*   Updated: 2023/12/28 06:18:23 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ void	ft_cd(t_main	*main)
 			main->lexer_list->content);
 	free(main->shell_name);
 	main->shell_name = ft_strjoin(main->pwd, " > monkeshell$ ");
+	main->i = 0;
 }
 
 void	ft_builtin(t_main *main)

@@ -6,7 +6,7 @@
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 03:11:04 by yokten            #+#    #+#             */
-/*   Updated: 2023/12/28 05:27:23 by yokten           ###   ########.fr       */
+/*   Updated: 2023/12/28 06:33:40 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	delete_node_t_exp(t_exp **exp, char *content)
 	node = *exp;
 	while (node != NULL)
 	{
-		if (ft_strncmp(node->content, content, ft_strlen(content)) == 0 )
+		if (ft_strncmp(node->content, content, ft_strlen(content)) == 0)
 		{
 			if (prev == NULL)
 				*exp = node->next;
@@ -98,12 +98,14 @@ void	replace_or_add_exp(t_exp **list, char *content)
 		i++;
 	while (tmp)
 	{
-		if (ft_strncmp(tmp->content, content, i) == 0)
+		if (!ft_strncmp(tmp->content, content, i) && ft_strchr(content, '='))
 		{
 			free(tmp->content);
 			tmp->content = ft_strdup(content);
 			return ;
 		}
+		else if (ft_strncmp(tmp->content, content, i) == 0)
+			return ;
 		tmp = tmp->next;
 	}
 	export_lstadd_back(list, export_listnew(ft_strdup(content)));

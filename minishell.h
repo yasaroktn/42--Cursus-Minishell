@@ -6,7 +6,7 @@
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 03:11:32 by yokten            #+#    #+#             */
-/*   Updated: 2023/12/24 07:45:40 by yokten           ###   ########.fr       */
+/*   Updated: 2023/12/28 06:54:17 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,5 +117,6 @@ int		err_syntax(t_main *main);
 void	dollar_manage3(t_main *main, char *string);
 void	err_unexpected(void);
 void	copy_env(t_main *main);
+void	redir_control(t_main	*main);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 03:10:29 by yokten            #+#    #+#             */
-/*   Updated: 2023/12/28 03:54:03 by yokten           ###   ########.fr       */
+/*   Updated: 2023/12/28 06:24:20 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ void	parse_path2(t_main *main, char *slash_content)
 
 void	parse_path3(t_main *main)
 {
-	if (ft_strcmp(main->lexer_list->content, "exit") || !main->lexer_list->content[0])
+	if (ft_strcmp(main->lexer_list->content, "exit") || \
+	!main->lexer_list->content[0])
 		printf("command not found: %s\n", main->lexer_list->content);
 	exit(127);
 }

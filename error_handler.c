@@ -6,7 +6,7 @@
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 03:10:15 by yokten            #+#    #+#             */
-/*   Updated: 2023/12/24 08:38:55 by yokten           ###   ########.fr       */
+/*   Updated: 2023/12/28 07:09:34 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ void	error_code(t_main	*main)
 
 int	error_control(t_main	*main)
 {
-	if (!check_quotes(main))
-		return (0);
 	if (main->lexer_list->content && main->lexer_list->content[0] \
 	&& ft_strchr(";?<>&|", main->lexer_list->content[0]))
 	{

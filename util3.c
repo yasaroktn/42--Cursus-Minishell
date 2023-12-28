@@ -6,7 +6,7 @@
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 05:47:04 by yokten            #+#    #+#             */
-/*   Updated: 2023/12/24 06:28:02 by yokten           ###   ########.fr       */
+/*   Updated: 2023/12/28 06:58:59 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,16 @@ void	copy_env(t_main *main)
 	{
 		main->env2[main->z++] = main->env_list->content;
 		main->env_list = main->env_list->next;
+	}
+}
+
+void	redir_control(t_main	*main)
+{
+	if (main->lexer_list->next->next && \
+	main->lexer_list->next->next->type == REDIR)
+	{
+		dup2(main->heredoc_fd[0], 0);
+		main->lexer_list = main->lexer_list->next->next;
+		ft_redirections(main);
 	}
 }

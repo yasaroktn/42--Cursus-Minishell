@@ -6,7 +6,7 @@
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 03:11:11 by yokten            #+#    #+#             */
-/*   Updated: 2023/12/24 07:39:25 by yokten           ###   ########.fr       */
+/*   Updated: 2023/12/28 06:02:50 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,10 @@ void	start_shell(t_main *main)
 			add_history(main->input);
 		if (main->input == NULL)
 			exit(1);
-		start_shell2(main, status);
+		if (!check_quotes(main))
+			free_main(main);
+		else
+			start_shell2(main, status);
 	}
 }
 

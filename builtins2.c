@@ -6,7 +6,7 @@
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 03:09:41 by yokten            #+#    #+#             */
-/*   Updated: 2023/12/28 03:49:20 by yokten           ###   ########.fr       */
+/*   Updated: 2023/12/28 06:24:36 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ void	ft_export(t_main	*main)
 {
 	main->i = 0;
 	main->export_list = main->export_head;
-	if (main->lexer_list->next == NULL || main->lexer_list->next->type != ARGUMENT)
+	if (main->lexer_list->next == NULL || \
+	main->lexer_list->next->type != ARGUMENT)
 	{
 		while (main->export_list)
 		{
