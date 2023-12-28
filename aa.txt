@@ -1,0 +1,17 @@
+readline
+readline
+readline
+error_handler.c
+error_handler.o
+heredoc.c
+heredoc.o
+parser.c
+parser.o
+parser2.c
+parser2.o
+parser3.c
+parser3.o
+readline
+redirections.c
+redirections.o
+structs.h

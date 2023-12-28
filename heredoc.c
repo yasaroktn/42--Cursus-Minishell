@@ -6,7 +6,7 @@
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 03:10:36 by yokten            #+#    #+#             */
-/*   Updated: 2023/12/24 04:59:07 by yokten           ###   ########.fr       */
+/*   Updated: 2023/12/28 00:00:20 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	start_heredoc(t_main	*main)
 void	start_heredoc2(t_main	*main, char *input)
 {
 	if (!ft_strncmp(main->lexer_list->next->content, input,
-			ft_strlen(main->lexer_list->next->content)))
+			ft_strlen(input)))
 	{
 		main->lexer_list = main->lexer_list->next->next;
 	}

@@ -6,7 +6,7 @@
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 03:11:04 by yokten            #+#    #+#             */
-/*   Updated: 2023/12/24 03:11:05 by yokten           ###   ########.fr       */
+/*   Updated: 2023/12/28 05:27:23 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	delete_node_t_exp(t_exp **exp, char *content)
 	node = *exp;
 	while (node != NULL)
 	{
-		if (ft_strncmp(node->content, content, ft_strlen(content)) == 0)
+		if (ft_strncmp(node->content, content, ft_strlen(content)) == 0 )
 		{
 			if (prev == NULL)
 				*exp = node->next;

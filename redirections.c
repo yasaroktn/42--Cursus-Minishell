@@ -6,7 +6,7 @@
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 03:11:59 by yokten            #+#    #+#             */
-/*   Updated: 2023/12/24 04:50:57 by yokten           ###   ########.fr       */
+/*   Updated: 2023/12/28 04:56:41 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ void	create_file(t_main *main, int mode)
 	int		fd;
 
 	fd = 0;
+	if (main->heredoc_flag)
+		dup2(main->heredoc_fd[0], 0);
 	if (!main->lexer_list->next)
 		err_unexpected();
 	else if (mode == 2)
@@ -104,4 +106,14 @@ void	heredoc(t_main	*main)
 		perror("heredoc err");
 	g_signal = 2;
 	start_heredoc(main);
+	if (main->lexer_list->next->next && !ft_strcmp(main->lexer_list->next->next->content, ">>"))
+	{
+		main->lexer_list = main->lexer_list->next->next;
+		create_file(main, 1);
+	}
+	else if (main->lexer_list->next->next && !ft_strcmp(main->lexer_list->next->next->content, ">"))
+	{
+		main->lexer_list = main->lexer_list->next->next;
+		create_file(main, 2);
+	}
 }

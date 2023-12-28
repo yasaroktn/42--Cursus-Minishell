@@ -6,7 +6,7 @@
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 03:10:02 by yokten            #+#    #+#             */
-/*   Updated: 2023/12/24 03:10:03 by yokten           ###   ########.fr       */
+/*   Updated: 2023/12/28 04:56:19 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ void	ft_unset(t_main *main)
 		delete_node_t_env(&main->env_head, main->tmp_joined);
 		free(main->tmp_joined);
 	}
+	if (main->lexer_list->next && main->lexer_list->next->type == ARGUMENT)
+		ft_unset(main);
 }
 
 int	exit_numeric_control(char *str)

@@ -6,7 +6,7 @@
 #    By: yokten <yokten@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/24 03:11:17 by yokten            #+#    #+#              #
-#    Updated: 2023/12/24 05:46:48 by yokten           ###   ########.fr        #
+#    Updated: 2023/12/28 04:54:02 by yokten           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,7 @@ SRCS	=	main.c				\
 
 CC = @gcc
 NAME = minishell
-CFLAGS = #-Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror #-fsanitize=address
 RM = @rm -rf
 LIBFT = libft/libft.a
 OBJS = $(SRCS:.c=.o)
