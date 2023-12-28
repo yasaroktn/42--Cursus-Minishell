@@ -6,7 +6,7 @@
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 03:10:15 by yokten            #+#    #+#             */
-/*   Updated: 2023/12/28 07:09:34 by yokten           ###   ########.fr       */
+/*   Updated: 2023/12/28 07:18:10 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	error_code(t_main	*main)
 {
+	free(main->lexer_list->content);
 	main->lexer_list->content = ft_itoa(main->err_no);
 }
 
