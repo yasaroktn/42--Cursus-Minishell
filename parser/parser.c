@@ -6,11 +6,11 @@
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 03:11:40 by yokten            #+#    #+#             */
-/*   Updated: 2023/12/24 08:23:45 by yokten           ###   ########.fr       */
+/*   Updated: 2023/12/28 07:50:24 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../header/minishell.h"
 
 void	pipe_manage(t_main *main)
 {

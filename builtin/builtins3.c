@@ -6,11 +6,11 @@
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 03:10:02 by yokten            #+#    #+#             */
-/*   Updated: 2023/12/28 05:32:33 by yokten           ###   ########.fr       */
+/*   Updated: 2023/12/28 07:50:24 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../header/minishell.h"
 
 void	declare_export(t_main	*main)
 {

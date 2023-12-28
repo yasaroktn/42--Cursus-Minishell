@@ -6,7 +6,7 @@
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 03:11:32 by yokten            #+#    #+#             */
-/*   Updated: 2023/12/28 06:54:17 by yokten           ###   ########.fr       */
+/*   Updated: 2023/12/28 07:52:57 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 # include <signal.h>
 # include <termios.h>
 # include "structs.h"
-# include "libft/libft.h"
+# include "../libft/libft.h"
 # include <readline/readline.h>
 # include <readline/history.h>
 

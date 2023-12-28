@@ -6,11 +6,11 @@
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 03:12:06 by yokten            #+#    #+#             */
-/*   Updated: 2023/12/24 03:12:07 by yokten           ###   ########.fr       */
+/*   Updated: 2023/12/28 07:50:24 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../header/minishell.h"
 
 static void	ft_termios(void)
 {

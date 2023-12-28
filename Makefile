@@ -6,7 +6,7 @@
 #    By: yokten <yokten@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/24 03:11:17 by yokten            #+#    #+#              #
-#    Updated: 2023/12/28 04:54:02 by yokten           ###   ########.fr        #
+#    Updated: 2023/12/28 07:49:49 by yokten           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,26 +19,26 @@ RL_FLAGS= -lft -L $(LIBFT) $(LIBS) -L ./lib/readline/lib
 RL_INCS = --I. -I ./lib/readline/include
 
 
-SRCS	=	main.c				\
-			util.c				\
-			util2.c				\
-			util3.c 			\
-			parser.c			\
-			parser2.c			\
-			list_util.c			\
-			list_util2.c		\
-			builtins.c 			\
-			builtins2.c			\
-			builtins3.c 		\
-			exec.c 				\
-			list_util3.c		\
-			exec2.c				\
-			redirections.c		\
-			builtins4.c			\
-			signals.c			\
-			error_handler.c		\
-			heredoc.c 			\
-			parser3.c			\
+SRCS	=	main/main.c				\
+			main/error_handler.c	\
+			until/util.c			\
+			until/util2.c			\
+			until/util3.c 			\
+			parser/parser.c			\
+			parser/parser2.c		\
+			parser/parser3.c		\
+			list/list_util.c		\
+			list/list_util2.c		\
+			list/list_util3.c		\
+			builtin/builtins.c 		\
+			builtin/builtins2.c		\
+			builtin/builtins3.c 	\
+			builtin/builtins4.c		\
+			executer/exec.c 		\
+			executer/exec2.c		\
+			redir/redirections.c	\
+			redir/heredoc.c 		\
+			signal/signals.c		\
 
 CC = @gcc
 NAME = minishell

@@ -6,11 +6,11 @@
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 03:11:11 by yokten            #+#    #+#             */
-/*   Updated: 2023/12/28 06:02:50 by yokten           ###   ########.fr       */
+/*   Updated: 2023/12/28 07:50:24 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../header/minishell.h"
 
 int	check_quotes(t_main	*main)
 {
