@@ -6,7 +6,7 @@
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 03:13:45 by yokten            #+#    #+#             */
-/*   Updated: 2023/12/28 07:50:24 by yokten           ###   ########.fr       */
+/*   Updated: 2023/12/28 22:06:17 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	init_main(t_main *main)
 	main->pipe_count = 0;
 	main->double_q = 0;
 	main->single_q = 0;
+	main->err_no = 0;
 	main->b = 0;
 	main->pid = malloc(sizeof(int) * 100);
 	main->pwd = getcwd(NULL, 0);

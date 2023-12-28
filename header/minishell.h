@@ -6,7 +6,7 @@
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 03:11:32 by yokten            #+#    #+#             */
-/*   Updated: 2023/12/28 15:07:49 by yokten           ###   ########.fr       */
+/*   Updated: 2023/12/28 21:36:57 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,5 +118,7 @@ void	dollar_manage3(t_main *main, char *string);
 void	err_unexpected(void);
 void	copy_env(t_main *main);
 void	redir_control(t_main	*main);
+void	ft_pwd_add(t_env *env, char *pwd);
+void	ft_oldpwd_add(t_env *env, char *oldpwd);
 
 #endif

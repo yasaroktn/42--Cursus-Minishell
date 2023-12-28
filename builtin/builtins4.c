@@ -6,7 +6,7 @@
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 03:10:09 by yokten            #+#    #+#             */
-/*   Updated: 2023/12/28 07:50:24 by yokten           ###   ########.fr       */
+/*   Updated: 2023/12/28 21:42:09 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,46 @@ void	ft_change_dir(t_main *main)
 	if (main->pwd != NULL)
 		free(main->pwd);
 	main->pwd = getcwd(str, 0);
+	ft_pwd_add(main->env_list, main->pwd);
+}
+
+void	ft_pwd_add(t_env *env, char *pwd)
+{
+	t_env	*tmp;
+
+	tmp = env;
+	while (tmp && ft_strncmp(tmp->content, "PWD=", 4))
+		tmp = tmp->next;
+	if (tmp && tmp->content)
+	{
+		free(tmp->content);
+		tmp->content = NULL;
+		tmp->content = ft_strjoin("PWD=", pwd);
+	}
+}
+
+void	ft_oldpwd_add(t_env *env, char *oldpwd)
+{
+	t_env	*tmp;
+	char	*str;
+
+	str = NULL;
+	tmp = env;
+	while (tmp && ft_strncmp(tmp->content, "OLDPWD=", 7))
+		tmp = tmp->next;
+	if (tmp == NULL)
+	{
+		str = ft_strjoin("OLDPWD=", oldpwd);
+		env_lstadd_back(&env, env_listnew(ft_strdup(str)));
+		free(str);
+		str = NULL;
+	}
+	else
+	{
+		free(tmp->content);
+		tmp->content = NULL;
+		tmp->content = ft_strjoin("OLDPWD=", oldpwd);
+	}
 }
 
 void	add_export_env(t_main *main)

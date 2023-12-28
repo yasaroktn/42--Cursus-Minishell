@@ -6,7 +6,7 @@
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 03:09:29 by yokten            #+#    #+#             */
-/*   Updated: 2023/12/28 08:04:47 by yokten           ###   ########.fr       */
+/*   Updated: 2023/12/28 21:25:23 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,11 +75,17 @@ void	ft_echo(t_main *main)
 
 void	ft_cd(t_main	*main)
 {
+	char	pwd[256];
+	char	*oldpwd;
+
+	oldpwd = ft_strdup(getcwd(pwd, 256));
 	main->i = 0;
 	if (main->lexer_list->next)
 		main->lexer_list = main->lexer_list->next;
 	if (main->lexer_list && main->lexer_list->type == ARGUMENT)
 		main->i = chdir(main->lexer_list->content);
+	if (main->i >= 0)
+		ft_oldpwd_add(main->env_list, oldpwd);
 	else if (!main->lexer_list->next)
 		main->i = chdir("/Users/yokten");
 	else if (main->lexer_list->next && main->lexer_list->next->type == ARGUMENT)
@@ -89,6 +95,8 @@ void	ft_cd(t_main	*main)
 		printf("cd: no such file or directory: %s\n",
 			main->lexer_list->content);
 	free(main->shell_name);
+	free(oldpwd);
+	oldpwd = NULL;
 	main->shell_name = ft_strjoin(main->pwd, " > monkeshell$ ");
 	main->i = 0;
 }
