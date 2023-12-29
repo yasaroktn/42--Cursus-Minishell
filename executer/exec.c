@@ -6,7 +6,7 @@
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 03:10:23 by yokten            #+#    #+#             */
-/*   Updated: 2023/12/28 14:56:36 by yokten           ###   ########.fr       */
+/*   Updated: 2023/12/29 05:56:58 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void	ft_exec(t_main	*main)
 {
 	pipe(main->io);
-	main->exec_fd = main->io[0];
 	main->pid2 = fork();
 	if (main->pid2 < 0)
 	{

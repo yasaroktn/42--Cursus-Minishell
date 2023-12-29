@@ -6,8 +6,8 @@
       "type": "lldb",
       "request": "launch",
       "args": [],
-      "cwd": "/Users/yokten/Desktop/test/builtin",
-      "program": "/Users/yokten/Desktop/test/builtin/build/Debug/outDebug"
+      "cwd": "/Users/yokten/Desktop/test/executer",
+      "program": "/Users/yokten/Desktop/test/executer/build/Debug/outDebug"
     }
   ]
 }
