@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ckarakus <ckarakus@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 03:11:40 by yokten            #+#    #+#             */
-/*   Updated: 2023/12/28 07:50:24 by yokten           ###   ########.fr       */
+/*   Updated: 2023/12/30 14:04:24 by ckarakus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	redir_manage(t_main *main)
 {
 	main->redir_count++;
 	main->lexer_list->type = REDIR;
+	main->parse_flag = 0;
 	if (!ft_strncmp(&main->input[main->i], ">>", 2))
 	{
 		main->lexer_list->content = ft_strdup(">>");

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ckarakus <ckarakus@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 03:11:59 by yokten            #+#    #+#             */
-/*   Updated: 2023/12/28 07:50:24 by yokten           ###   ########.fr       */
+/*   Updated: 2023/12/30 14:35:14 by ckarakus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	create_file(t_main *main, int mode)
 		printf("Cannot create file\n");
 		exit (1);
 	}
-	dup2(fd, 1);
+	//dup2(fd, 1);
 	close(fd);
 	if (main->lexer_list->next->next)
 	{

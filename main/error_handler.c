@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_handler.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ckarakus <ckarakus@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 03:10:15 by yokten            #+#    #+#             */
-/*   Updated: 2023/12/28 22:43:26 by yokten           ###   ########.fr       */
+/*   Updated: 2023/12/30 13:59:34 by ckarakus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,9 @@ void	error_code(t_main	*main)
 int	error_control(t_main	*main)
 {
 	if (main->lexer_list->content && main->lexer_list->content[0] \
-	&& ft_strchr(";?<>&|", main->lexer_list->content[0]))
+	&& ft_strchr(";?&|", main->lexer_list->content[0]))
 	{
+		printf("girdim\n");
 		err_syntax(main);
 		return (0);
 	}
@@ -31,12 +32,14 @@ int	error_control(t_main	*main)
 		if (main->lexer_list->type == PIPE && \
 		(!main->lexer_list->next || main->lexer_list->next->type == PIPE))
 		{
+			printf("girdim\n");
 			err_syntax(main);
 			return (0);
 		}
 		if (main->lexer_list->type == REDIR && \
 		(!main->lexer_list->next || main->lexer_list->next->type == REDIR))
 		{
+			printf("girdim\n");
 			err_syntax(main);
 			return (0);
 		}
@@ -59,6 +62,8 @@ void	start_shell2(t_main	*main, int status)
 	{
 		if (main->lexer_list->type == COMMAND)
 			ft_builtin(main);
+		if (main->lexer_list->type == REDIR)
+			ft_redirections(main);
 		if (!main->lexer_list || main->lexer_list->next == NULL)
 			break ;
 		main->lexer_list = main->lexer_list->next;
@@ -74,6 +79,7 @@ void	start_shell2(t_main	*main, int status)
 
 int	err_syntax(t_main *main)
 {
+	printf("girdim\n");
 	main->err_no = 258;
 	printf("monkeshell: syntax error near unexpected token\n");
 	return (0);

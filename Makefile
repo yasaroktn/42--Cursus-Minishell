@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yokten <yokten@student.42.fr>              +#+  +:+       +#+         #
+#    By: ckarakus <ckarakus@student.42istanbul.c    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/24 03:11:17 by yokten            #+#    #+#              #
-#    Updated: 2023/12/28 19:57:00 by yokten           ###   ########.fr        #
+#    Updated: 2023/12/30 14:32:39 by ckarakus         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,12 +69,6 @@ fclean: clean
 	$(RM) $(NAME)
 	@make fclean -C libft
 	@rm -rf readline-8.2 readline-8.2.tar.gz
-
-git:
-	@make fclean
-	git add .
-	git commit -m "auto commit"
-	git push
 
 clean:
 	$(RM) $(OBJS)
