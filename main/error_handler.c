@@ -6,7 +6,7 @@
 /*   By: ckarakus <ckarakus@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 03:10:15 by yokten            #+#    #+#             */
-/*   Updated: 2023/12/30 13:59:34 by ckarakus         ###   ########.fr       */
+/*   Updated: 2023/12/30 15:16:00 by ckarakus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	start_shell2(t_main	*main, int status)
 		if (main->lexer_list->type == COMMAND)
 			ft_builtin(main);
 		if (main->lexer_list->type == REDIR)
-			ft_redirections(main);
+			first_redir(main);
 		if (!main->lexer_list || main->lexer_list->next == NULL)
 			break ;
 		main->lexer_list = main->lexer_list->next;
@@ -73,8 +73,6 @@ void	start_shell2(t_main	*main, int status)
 			last = status;
 	main->err_no = last / 256;
 	free_main(main);
-	main->pipe_count = 0;
-	main->redir_count = 0;
 }
 
 int	err_syntax(t_main *main)

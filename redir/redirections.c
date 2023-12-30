@@ -6,7 +6,7 @@
 /*   By: ckarakus <ckarakus@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 03:11:59 by yokten            #+#    #+#             */
-/*   Updated: 2023/12/30 14:35:14 by ckarakus         ###   ########.fr       */
+/*   Updated: 2023/12/30 15:26:39 by ckarakus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ void	create_file(t_main *main, int mode)
 		printf("Cannot create file\n");
 		exit (1);
 	}
-	//dup2(fd, 1);
+	if (!main->not_command)
+		dup2(fd, 1);
 	close(fd);
 	if (main->lexer_list->next->next)
 	{
@@ -70,7 +71,8 @@ void	input(t_main *main)
 		main->lexer_list->next->content);
 		exit(1);
 	}
-	dup2(fd, STDIN_FILENO);
+	if (!main->not_command)
+		dup2(fd, STDIN_FILENO);
 	close(fd);
 	if (main->lexer_list->next->next)
 	{
@@ -89,20 +91,9 @@ void	ft_ctrl(int sig)
 	}
 }
 
-void	heredoc(t_main	*main)
+void	first_redir(t_main	*main)
 {
-	if (!main->lexer_list->next)
-	{
-		printf("monkeshell: syntax error near unexpected token `newline'\n");
-		exit(1);
-	}
-	else if (main->heredoc_flag)
-		close(main->heredoc_fd[0]);
-	main->heredoc_flag = 1;
-	signal(SIGINT, ft_ctrl);
-	if (pipe(main->heredoc_fd) == -1)
-		perror("heredoc err");
-	g_signal = 2;
-	start_heredoc(main);
-	redir_control(main);
+	main->not_command = 1;
+	ft_redirections(main);
+	main->not_command = 0;
 }

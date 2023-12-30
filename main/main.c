@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ckarakus <ckarakus@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 03:11:11 by yokten            #+#    #+#             */
-/*   Updated: 2023/12/28 15:27:14 by yokten           ###   ########.fr       */
+/*   Updated: 2023/12/30 14:51:14 by ckarakus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ int	free_main(t_main *main)
 	lex_lstclear(&main->lexer_head);
 	free(main->input);
 	main->input = NULL;
+	main->pipe_count = 0;
+	main->redir_count = 0;
 	return (1);
 }
 

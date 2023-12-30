@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ckarakus <ckarakus@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 03:13:50 by yokten            #+#    #+#             */
-/*   Updated: 2023/12/24 03:13:53 by yokten           ###   ########.fr       */
+/*   Updated: 2023/12/30 15:21:56 by ckarakus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ typedef struct s_main
 	int		q;
 	int		r;
 	int		redir_count;
+	int		not_command;
 	int		dollar;
 	int		pipe_count;
 	int		parse_flag;

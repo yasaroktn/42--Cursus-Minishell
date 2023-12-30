@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   util.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ckarakus <ckarakus@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 03:13:45 by yokten            #+#    #+#             */
-/*   Updated: 2023/12/28 22:06:17 by yokten           ###   ########.fr       */
+/*   Updated: 2023/12/30 15:26:36 by ckarakus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	init_main(t_main *main)
 	main->j = 0;
 	main->a = -1;
 	main->pipe_count = 0;
+	main->not_command = 0;
 	main->double_q = 0;
 	main->single_q = 0;
 	main->err_no = 0;

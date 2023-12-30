@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ckarakus <ckarakus@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 03:11:32 by yokten            #+#    #+#             */
-/*   Updated: 2023/12/28 21:36:57 by yokten           ###   ########.fr       */
+/*   Updated: 2023/12/30 15:19:27 by ckarakus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ void	export_lstadd_back(t_exp **lst, t_exp *new);
 void	add_export(t_main	*main);
 void	add_env(t_main	*main);
 void	ft_env(t_main *main);
+void	ft_ctrl(int sig);
 void	print_export(t_main	*main);
 void	ft_export(t_main *main);
 void	add_export_env(t_main	*main);
@@ -117,6 +118,7 @@ int		err_syntax(t_main *main);
 void	dollar_manage3(t_main *main, char *string);
 void	err_unexpected(void);
 void	copy_env(t_main *main);
+void	first_redir(t_main	*main);
 void	redir_control(t_main	*main);
 void	ft_pwd_add(t_env *env, char *pwd);
 void	ft_oldpwd_add(t_env *env, char *oldpwd);
