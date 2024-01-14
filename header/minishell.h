@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ckarakus <ckarakus@student.42istanbul.c    +#+  +:+       +#+        */
+/*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 03:11:32 by yokten            #+#    #+#             */
-/*   Updated: 2023/12/30 15:19:27 by ckarakus         ###   ########.fr       */
+/*   Updated: 2024/01/14 11:50:56 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,5 +122,6 @@ void	first_redir(t_main	*main);
 void	redir_control(t_main	*main);
 void	ft_pwd_add(t_env *env, char *pwd);
 void	ft_oldpwd_add(t_env *env, char *oldpwd);
+char	*ft_getenv(char	*str, t_main	*main);
 
 #endif

@@ -6,8 +6,8 @@
       "type": "lldb",
       "request": "launch",
       "args": [],
-      "cwd": "/Users/yokten/Desktop/SON/until",
-      "program": "/Users/yokten/Desktop/SON/until/build/Debug/outDebug"
+      "cwd": "/Users/yokten/Desktop/SON/parser",
+      "program": "/Users/yokten/Desktop/SON/parser/build/Debug/outDebug"
     }
   ]
 }
