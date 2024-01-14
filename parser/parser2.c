@@ -6,7 +6,7 @@
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 03:11:46 by yokten            #+#    #+#             */
-/*   Updated: 2024/01/14 11:55:25 by yokten           ###   ########.fr       */
+/*   Updated: 2024/01/14 15:11:30 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,14 @@ void	dollar_manage(char *string, t_main *main)
 		else if (string[main->a] == '$')
 		{
 			tmp = split_dolar_or_space(string, main);
-			if (ft_getenv(tmp, main) == NULL)
-				ft_memset(&main->lexer_list->content[main->i - 1], '\0', 1);
-			else if (ft_getenv(tmp, main) != NULL)
+			main->tmp = ft_getenv(tmp, main);
+			if (main->tmp)
 			{
-				main->tmp = ft_strdup(ft_getenv(tmp, main));
 				main->lexer_list->content = ft_string_join \
 				(main->lexer_list->content, main->tmp);
 			}
+			else
+				ft_memset(&main->lexer_list->content[main->i - 1], '\0', 1);
 			free(tmp);
 		}
 		else
@@ -42,11 +42,11 @@ void	dollar_manage(char *string, t_main *main)
 
 void	normal_dollar_manage(char	*str, t_main	*main)
 {
+	main->tmp = ft_getenv(str, main);
 	if (!ft_strcmp(str, "?"))
 		error_code(main);
-	else if (1 && (main->tmp = ft_getenv(str, main)))
+	else if (main->tmp)
 	{
-		main->tmp = ft_strdup(ft_getenv(str, main));
 		main->lexer_list->content = ft_string_join \
 		(ft_substring(main->lexer_list->content, 0, main->i - 1), main->tmp);
 	}

@@ -6,7 +6,7 @@
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 05:47:04 by yokten            #+#    #+#             */
-/*   Updated: 2024/01/14 12:10:51 by yokten           ###   ########.fr       */
+/*   Updated: 2024/01/14 14:46:37 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,15 +48,16 @@ char	*ft_getenv(char	*str, t_main	*main)
 	int		i;
 	char	**tmp;
 
-	i = 0;
 	main->env_list = main->env_head;
+	i = 0;
 	while (main->env_list)
 	{
 		tmp = ft_split(main->env_list->content, '=');
-		if (!ft_strncmp(str, tmp[0], ft_strlen(tmp[0])))
+		if (!ft_strcmp(str, tmp[0]))
 		{
-			str = tmp[1];
-			free(tmp[0]);
+			str = ft_strdup(tmp[1]);
+			while (tmp[i])
+				free(tmp[i++]);
 			free(tmp);
 			return (str);
 		}

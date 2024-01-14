@@ -6,7 +6,7 @@
 #    By: yokten <yokten@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/24 03:23:28 by yokten            #+#    #+#              #
-#    Updated: 2023/12/24 03:23:29 by yokten           ###   ########.fr        #
+#    Updated: 2024/01/14 13:30:09 by yokten           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,7 +62,7 @@ OBJS = ${SRCS:.c=.o}
 BOBJS = $(BSRCS:.c=.o)
 NAME = libft.a
 CC = gcc
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra 
 RM = rm -rf
 LIBC = ar rc 
 
