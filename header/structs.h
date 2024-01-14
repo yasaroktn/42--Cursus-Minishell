@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ckarakus <ckarakus@student.42istanbul.c    +#+  +:+       +#+        */
+/*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 03:13:50 by yokten            #+#    #+#             */
-/*   Updated: 2023/12/30 15:21:56 by ckarakus         ###   ########.fr       */
+/*   Updated: 2024/01/14 04:17:19 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ typedef struct s_main
 	int		heredoc_flag;
 	int		err_no;
 	pid_t	pid2;
+	int		builtinflag;
 }	t_main;
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_handler.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ckarakus <ckarakus@student.42istanbul.c    +#+  +:+       +#+        */
+/*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 03:10:15 by yokten            #+#    #+#             */
-/*   Updated: 2023/12/30 15:16:00 by ckarakus         ###   ########.fr       */
+/*   Updated: 2024/01/14 04:50:40 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int	error_control(t_main	*main)
 	if (main->lexer_list->content && main->lexer_list->content[0] \
 	&& ft_strchr(";?&|", main->lexer_list->content[0]))
 	{
-		printf("girdim\n");
 		err_syntax(main);
 		return (0);
 	}
@@ -32,14 +31,12 @@ int	error_control(t_main	*main)
 		if (main->lexer_list->type == PIPE && \
 		(!main->lexer_list->next || main->lexer_list->next->type == PIPE))
 		{
-			printf("girdim\n");
 			err_syntax(main);
 			return (0);
 		}
 		if (main->lexer_list->type == REDIR && \
 		(!main->lexer_list->next || main->lexer_list->next->type == REDIR))
 		{
-			printf("girdim\n");
 			err_syntax(main);
 			return (0);
 		}
@@ -52,32 +49,33 @@ void	start_shell2(t_main	*main, int status)
 {
 	int	last;
 
+	last = 0;
 	if (main->input)
 		ft_parser(main);
 	main->lexer_list = main->lexer_head;
 	if (!error_control(main) && free_main(main))
 		return ;
 	main->lexer_list = main->lexer_head;
+	if (main->lexer_list->type == REDIR)
+		first_redir(main);
 	while (main->lexer_list != NULL)
 	{
 		if (main->lexer_list->type == COMMAND)
 			ft_builtin(main);
-		if (main->lexer_list->type == REDIR)
-			first_redir(main);
 		if (!main->lexer_list || main->lexer_list->next == NULL)
 			break ;
 		main->lexer_list = main->lexer_list->next;
 	}
 	while (main->x++ < main->pipe_count + 1)
-		if (waitpid(0, &status, 0) == main->pid2)
+		if (main->builtinflag == 0 && waitpid(0, &status, 0) == main->pid2)
 			last = status;
 	main->err_no = last / 256;
+	main->builtinflag = 1;
 	free_main(main);
 }
 
 int	err_syntax(t_main *main)
 {
-	printf("girdim\n");
 	main->err_no = 258;
 	printf("monkeshell: syntax error near unexpected token\n");
 	return (0);

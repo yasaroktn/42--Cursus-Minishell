@@ -6,7 +6,7 @@
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 03:10:23 by yokten            #+#    #+#             */
-/*   Updated: 2023/12/29 05:56:58 by yokten           ###   ########.fr       */
+/*   Updated: 2024/01/14 04:22:21 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	ft_exec(t_main	*main)
 {
+	main->builtinflag = 0;
 	pipe(main->io);
 	main->pid2 = fork();
 	if (main->pid2 < 0)

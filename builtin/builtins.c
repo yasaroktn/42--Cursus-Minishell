@@ -6,7 +6,7 @@
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 03:09:29 by yokten            #+#    #+#             */
-/*   Updated: 2023/12/28 21:25:23 by yokten           ###   ########.fr       */
+/*   Updated: 2024/01/14 05:30:14 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,12 +82,12 @@ void	ft_cd(t_main	*main)
 	main->i = 0;
 	if (main->lexer_list->next)
 		main->lexer_list = main->lexer_list->next;
+	else if (!main->lexer_list->next)
+		main->i = chdir("/Users/yokten");
 	if (main->lexer_list && main->lexer_list->type == ARGUMENT)
 		main->i = chdir(main->lexer_list->content);
 	if (main->i >= 0)
 		ft_oldpwd_add(main->env_list, oldpwd);
-	else if (!main->lexer_list->next)
-		main->i = chdir("/Users/yokten");
 	else if (main->lexer_list->next && main->lexer_list->next->type == ARGUMENT)
 		printf("cd: too many arguments\n");
 	ft_change_dir(main);
