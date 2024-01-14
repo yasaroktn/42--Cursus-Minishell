@@ -6,7 +6,7 @@
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 03:11:11 by yokten            #+#    #+#             */
-/*   Updated: 2024/01/14 04:22:34 by yokten           ###   ########.fr       */
+/*   Updated: 2024/01/14 15:33:44 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ int	main(int argc, char **argv, char **env)
 	g_signal = 0;
 	init_signal();
 	main->shell_name = ft_strjoin(main->pwd, " > monkeshell$ ");
-	main->builtinflag = 1;
 	start_shell(main);
 	return (0);
 }

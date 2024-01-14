@@ -6,7 +6,7 @@
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 03:10:15 by yokten            #+#    #+#             */
-/*   Updated: 2024/01/14 04:50:40 by yokten           ###   ########.fr       */
+/*   Updated: 2024/01/14 15:34:24 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ void	start_shell2(t_main	*main, int status)
 		if (main->builtinflag == 0 && waitpid(0, &status, 0) == main->pid2)
 			last = status;
 	main->err_no = last / 256;
-	main->builtinflag = 1;
 	free_main(main);
 }
 

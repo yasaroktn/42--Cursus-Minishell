@@ -6,7 +6,7 @@
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 03:13:40 by yokten            #+#    #+#             */
-/*   Updated: 2023/12/28 22:11:21 by yokten           ###   ########.fr       */
+/*   Updated: 2024/01/14 15:34:31 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,4 +90,5 @@ void	reset_main(t_main *main)
 {
 	main->process_iterator = 0;
 	main->x = 0;
+	main->builtinflag = 1;
 }
