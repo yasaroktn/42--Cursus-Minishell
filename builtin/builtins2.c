@@ -6,7 +6,7 @@
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 03:09:41 by yokten            #+#    #+#             */
-/*   Updated: 2023/12/28 07:50:24 by yokten           ###   ########.fr       */
+/*   Updated: 2024/01/16 01:45:42 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	ft_pwd(t_main *main)
 
 void	ft_env(t_main *main)
 {
-	main->i = 0;
 	main->env_list = main->env_head;
 	if (main->lexer_list->next && main->lexer_list->next->type == ARGUMENT)
 		printf("env: %s: No such file or directory\n", \

@@ -6,7 +6,7 @@
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 03:10:23 by yokten            #+#    #+#             */
-/*   Updated: 2024/01/14 04:22:21 by yokten           ###   ########.fr       */
+/*   Updated: 2024/01/16 01:51:30 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,7 @@ int	count_args(t_main *main)
 
 void	parse_path(t_main *main)
 {
-	char	*slash_content;
-
 	main->env_list = main->env_head;
-	slash_content = NULL;
 	while (main->env_list)
 	{
 		if (!ft_strncmp(main->env_list->content, "PATH=", 5))
@@ -73,7 +70,7 @@ void	parse_path(t_main *main)
 	}
 	if (main->lexer_list->content[0] != '/' \
 	&& ft_strncmp(main->lexer_list->content, "./", 2))
-		parse_path2(main, slash_content);
+		parse_path2(main);
 	else
 		main->res = ft_split(main->lexer_list->content, '\0');
 	main->k = -1;

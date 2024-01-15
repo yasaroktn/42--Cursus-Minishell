@@ -6,7 +6,7 @@
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 03:11:32 by yokten            #+#    #+#             */
-/*   Updated: 2024/01/14 11:50:56 by yokten           ###   ########.fr       */
+/*   Updated: 2024/01/15 22:53:56 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ t_lexer	*lex_listnew(char *content);
 void	lex_lstadd_back(t_lexer **lst, t_lexer *new);
 void	lex_lstclear(t_lexer **lst);
 char	*ft_string_join(char const *s1, char const *s2);
+char	*ft_string_join2(char const *s1, char const *s2);
 void	dollar_manage(char *string, t_main *main);
 char	*ft_strdup2(const char *s1);
 char	*ft_substring(char const *s, unsigned int start, size_t len);
@@ -110,7 +111,7 @@ void	ft_change_dir(t_main *main);
 void	replace_or_add_env(t_env **list, char *content);
 void	replace_or_add_exp(t_exp **list, char *content);
 void	add_export_env(t_main *main);
-void	parse_path2(t_main *main, char *slash_content);
+void	parse_path2(t_main *main);
 void	parse_path3(t_main *main);
 void	replace_or_add_env(t_env **list, char *content);
 void	replace_or_add_exp(t_exp **list, char *content);

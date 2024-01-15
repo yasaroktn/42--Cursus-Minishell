@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ckarakus <ckarakus@student.42istanbul.c    +#+  +:+       +#+        */
+/*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 03:11:40 by yokten            #+#    #+#             */
-/*   Updated: 2023/12/30 14:04:24 by ckarakus         ###   ########.fr       */
+/*   Updated: 2024/01/15 23:07:16 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	ft_parser(t_main *main)
 	main->parse_flag = 1;
 	while (main->input[main->i])
 	{
-		while (main->input[main->i] == ' ')
+		while (main->input[main->i] == ' ' || main->input[main->i] == '\t')
 			main->i++;
 		if (main->input[main->i] == '|')
 			pipe_manage(main);
@@ -94,7 +94,7 @@ void	ft_parser(t_main *main)
 			redir_manage(main);
 		else
 			normal_manage(main);
-		while (main->input[main->i] == ' ')
+		while (main->input[main->i] == ' ' || main->input[main->i] == '\t')
 			main->i++;
 		if (main->input[main->i] != '\0')
 		{

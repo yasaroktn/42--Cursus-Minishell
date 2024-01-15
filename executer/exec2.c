@@ -6,7 +6,7 @@
 /*   By: yokten <yokten@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 03:10:29 by yokten            #+#    #+#             */
-/*   Updated: 2023/12/28 22:22:15 by yokten           ###   ########.fr       */
+/*   Updated: 2024/01/15 22:54:16 by yokten           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,15 @@ void	child_process(t_main *main)
 	exit(0);
 }
 
-void	parse_path2(t_main *main, char *slash_content)
+void	parse_path2(t_main *main)
 {
+	char	*slash_content;
+
 	main->res = ft_split(&main->env_list->content[5], ':');
 	slash_content = ft_strjoin("/", main->lexer_list->content);
 	while (main->res[++main->z])
-		main->res[main->z] = ft_strjoin(main->res[main->z], slash_content);
+		main->res[main->z] = ft_string_join2(main->res[main->z], slash_content);
+	free(slash_content);
 }
 
 void	parse_path3(t_main *main)

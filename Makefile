@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ckarakus <ckarakus@student.42istanbul.c    +#+  +:+       +#+         #
+#    By: yokten <yokten@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/24 03:11:17 by yokten            #+#    #+#              #
-#    Updated: 2023/12/30 14:32:39 by ckarakus         ###   ########.fr        #
+#    Updated: 2024/01/15 22:39:54 by yokten           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,7 @@ SRCS	=	main/main.c				\
 
 CC = @gcc
 NAME = minishell
-CFLAGS = -Wall -Wextra -Werror -g#-fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -g
 RM = @rm -rf
 LIBFT = libft/libft.a
 OBJS = $(SRCS:.c=.o)
